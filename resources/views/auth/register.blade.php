@@ -3,17 +3,17 @@
         @csrf
 
         <div class="mt-4">
-            <x-input-label for="fname" :value="__('Имя')" />
-            <x-text-input id="fname" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"
-                required autofocus autocomplete="first_name" />
-            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
             <x-input-label for="lname" :value="__('Фамилия')" />
             <x-text-input id="lname" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')"
                 required autofocus autocomplete="last_name" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="fname" :value="__('Имя')" />
+            <x-text-input id="fname" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"
+                required autofocus autocomplete="first_name" />
+            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
         </div>
 
         <div class="mt-4">
