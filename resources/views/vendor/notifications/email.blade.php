@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('ru.hello')
 @endif
 @endif
 
@@ -39,20 +39,14 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>
+@lang('ru.regards'),<br>
 {{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
-@lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
-    [
-        'actionText' => $actionText,
-    ]
-) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+@lang('ru.trouble',['actionText' => $actionText,]) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
 @endisset
 </x-mail::message>

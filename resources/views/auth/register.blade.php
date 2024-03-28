@@ -24,6 +24,13 @@
         </div>
 
         <div class="mt-4">
+            <x-input-label for="dat" :value="__('Дата рождения')" />
+            <x-text-input id="dat" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')"
+                required autofocus autocomplete="date_of_birth" />
+            <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
                 required autocomplete="username" />
