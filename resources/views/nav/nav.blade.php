@@ -22,7 +22,7 @@
                             <a class="nav-link {{ request()->routeIs('doctors') ? 'active' : '' }}"
                                 href="{{ route('doctors') }}">Специалисты</a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('comments') ? 'active' : '' }}"
                                 href="{{ route('comments') }}">Отзывы</a>
                         </li>
@@ -34,7 +34,11 @@
                             @if (Auth::user()->role_id == 1)
                                 @php
                                     $active = '';
-                                    if (request()->routeIs('speciality.*') || request()->routeIs('doctor.*') || request()->routeIs('timetable.*')) {
+                                    if (
+                                        request()->routeIs('speciality.*') ||
+                                        request()->routeIs('doctor.*') ||
+                                        request()->routeIs('timetable.*')
+                                    ) {
                                         $active = 'active';
                                     }
                                 @endphp
@@ -43,7 +47,7 @@
                                         href="{{ route('speciality.index') }}">Администратор</a>
                                 </li>
                             @endif
-                        @endauth --}}
+                        @endauth
                     </ul>
                     <div class="d-flex">
                         @auth('web')
@@ -52,18 +56,29 @@
                                     data-bs-display="static" aria-expanded="false">
                                     {{ Auth::user()->first_name }}
                                     @php
-                                        // $count = Auth::getUser()->getAppointmentsCount();
+                                        $count = Auth::getUser()->getAppointmentsCount();
                                     @endphp
-                                    {{-- @if ($count > 0)
+                                    @if ($count > 0)
                                         <span
                                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             {{ $count }}
                                         </span>
-                                    @endif --}}
+                                    @endif
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    {{-- <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li> --}}
+                                    <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
+                                    {{-- <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li> --}}
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <a class="dropdown-item" href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                                Выйти
+                                            </a>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         @endauth

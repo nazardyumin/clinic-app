@@ -31,11 +31,11 @@
             $('#timezone').val(moment.tz.guess())
         });
     </script>
-    {{-- <script src="{{ asset('js/appointments.js') }}"></script>
-    <script src="{{ asset('js/admin_specialities.js') }}"></script>
-    <script src="{{ asset('js/admin_doctors.js') }}"></script>
-    <script src="{{ asset('js/admin_timetable.js') }}"></script>
-    <script src="{{ asset('js/account.js') }}"></script> --}}
+    <script src="{{ asset('storage/js/appointments.js') }}"></script>
+    <script src="{{ asset('storage/js/admin_specialities.js') }}"></script>
+    <script src="{{ asset('storage/js/admin_doctors.js') }}"></script>
+    <script src="{{ asset('storage/js/admin_timetable.js') }}"></script>
+    <script src="{{ asset('storage/js/account.js') }}"></script>
 </body>
 
 </html>
