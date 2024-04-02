@@ -3,10 +3,10 @@
 @section('extra')
     <div class="row">
         <div class="col-8">
-            <img class="img-fluid rounded-pill" src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
+            <img class="img-fluid rounded-pill" src="{{ asset('images/clinic.jpg') }}" alt="doctors">
         </div>
         <div class="col-3 mt-5">
-            <img class="img-fluid " src="{{ asset('storage/images/logo.png') }}" alt="doctors">
+            <img class="img-fluid " src="{{ asset('images/logo.png') }}" alt="doctors">
             <p>Наша клиника оказывает первичную медико-санитарную, специализированную, в том числе высокотехнологичную
                 медицинскую помощь взрослому и детскому населению планово в рамках Программы государственных гарантий
                 оказания гражданам бесплатной медицинской помощи. Коечная мощность стационара насчитывает 705 коек, мощность
@@ -19,7 +19,7 @@
                 малоинвазивных оперативных вмешательств, хирургическая активность составляет более 90 %.</p>
             <p class="form-text text-info mt-5">+7(347)286-15-46</p>
             <p class="form-text text-info">г.Уфа, ул.Шафиева, 2</p>
-            <p class="form-text text-info">dolgoletie@php.ru</p>
+            <p class="form-text text-info">clinic.laravel@yandex.ru</p>
         </div>
     </div>
 @endsection

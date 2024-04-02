@@ -25,12 +25,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $user = User::find($request->email);
+        $user = User::firstWhere('email', $request['email']);
         if ($user->timezone != $request['timezone']) {
             $user->timezone = $request['timezone'];
             $user->save();
         }
-        
+
         $request->authenticate();
 
         $request->session()->regenerate();
