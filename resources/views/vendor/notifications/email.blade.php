@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('ru.hello')
+# @lang('ru.hello', ['user' => Auth::user()->first_name])
 @endif
 @endif
 
@@ -46,7 +46,7 @@
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
-@lang('ru.trouble',['actionText' => $actionText,]) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+@lang('ru.trouble',['actionText' => $actionText]) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
 @endisset
 </x-mail::message>

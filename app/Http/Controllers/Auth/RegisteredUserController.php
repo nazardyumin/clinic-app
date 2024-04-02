@@ -45,13 +45,12 @@ class RegisteredUserController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            "timezone" => "Asia/Ekaterinburg",
+            "timezone" => $request->timezone,
             "role_id" => 2
         ]);
 
-        event(new Registered($user));
-
         Auth::login($user);
+        event(new Registered($user));
 
         return redirect(route('dashboard', absolute: false));
     }

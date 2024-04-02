@@ -4,8 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('test');
+    return redirect(route('home'));
 });
+
+Route::get('/home', function () {
+    return view('home.home');
+})->name('home');
+
+Route::get('/about', function () {
+    return view('home.about');
+})->name('about');
+
+Route::get('/doctors', null)->name('doctors');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -16,5 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
 
 require __DIR__ . '/auth.php';
