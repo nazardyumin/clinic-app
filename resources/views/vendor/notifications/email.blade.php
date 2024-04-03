@@ -6,7 +6,11 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
+@if(Auth::user())
 # @lang('ru.hello', ['user' => Auth::user()->first_name])
+@else
+# @lang('Здравствуйте!')
+@endif
 @endif
 @endif
 
