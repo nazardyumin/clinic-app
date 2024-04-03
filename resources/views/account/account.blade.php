@@ -5,13 +5,13 @@
 @endphp
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
-        <h4>Добрый день, {{ Auth::getUser()->first_name }}!</h4>
+        <h4>Добрый день, {{ Auth::getUser()->first_name . ' ' . Auth::getUser()->patronymic }}!</h4>
         <div class="row mt-5">
             <h6>Ваши записи:</h6>
             <hr>
             @if (count($appointments) > 0)
                 @foreach ($appointments as $app)
-                    <div class="col-5 mt-3">
+                <div class="col-12 col-md-12 col-lg-6 mt-3">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Врач: <strong>{{ $app->doctor->name }}</strong>

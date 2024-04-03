@@ -3,7 +3,7 @@
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
         <div class="row">
-            <div class="col-3">
+            <div class="col-12 col-md-12 col-lg-3">
                 <h3>Запись на прием</h3>
                 <form method="POST" action="{{ route('save_appointment') }}">
                     @csrf
@@ -66,7 +66,7 @@
                 </form>
 
             </div>
-            <div class="col-9 overflow-auto" style="height: 75vh;">
+            <div class="col-12 col-md-12 col-lg-9 overflow-auto mt-3" style="height: 75vh;">
                 <div class="mb-3">
                     @if (session()->has('appointments') && session()->has('count'))
                         @if (session('count') == 0)

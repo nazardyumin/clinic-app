@@ -5,7 +5,7 @@
     <div class="row">
         <form method="POST" action="{{ route('timetable.store') }}">
             @csrf
-            <div class="col-3 mb-3">
+            <div class="col-12 col-md-12 col-lg-3 mb-3">
                 <label for="ChooseDoctor" class="form-label">Выберите врача</label>
                 <select id="ChooseDoctor" class="form-select" aria-label="Choose Doctor" name="doctor_id">
                     <option value="0" selected>-- Не выбран --</option>
@@ -16,12 +16,12 @@
                 </select>
             </div>
 
-            <div class="col-1 mb-3">
+            <div class="col-12 col-md-12 col-lg-1 mb-3">
                 <label for="ChooseDate" class="form-label">Выберите дату</label>
                 <input id="ChooseDate" type="date" name="date" min="{{ $min_date }}" class="form-control">
             </div>
 
-            <div class="col-5 mb-3">
+            <div class="col-12 col-md-12 col-lg-5 mb-3">
                 <label for="ChooseHoursFrom" class="form-label col-auto">Выберите время</label>
 
                 <div class="input-group mb-3">

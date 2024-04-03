@@ -32,15 +32,15 @@ class DoctorController extends Controller
     {
         $data = $request->validate([
             "name" => ["required", "string"],
-            "photo" => ["required", "image", "dimensions:min_width=1500,min_height=1000,max_width=1500,max_height=1000"]
+            "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"]
         ]);
 
         if ((int)$request->speciality_id > 0) {
-            $photo = Storage::disk('public')->put('images', $data['photo']);
+            $photo = Storage::disk('images')->put('/docs', $data['photo']);
             Doctor::create([
                 "name" => $data["name"],
                 "speciality_id" => $request->speciality_id,
-                "photo" => 'storage/' . $photo
+                "photo" => 'images/'.$photo
             ]);
             return redirect(route('doctor.index'))->withErrors(['success' => 'Врач успешно добавлен']);
         }
@@ -66,14 +66,15 @@ class DoctorController extends Controller
             $data = Validator::make($request->all(), [
                 "name" => ["required", "string"],
                 "speciality_id" => ["numeric"],
-                "photo" => ["required", "image", "dimensions:min_width=1500,min_height=1000,max_width=1500,max_height=1000"]
+                "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"]
             ]);
             if ($data->fails()) {
-                return response()->json(['message' => 'Допустимое разрешение фото 1500х1000']);
+                return response()->json(['message' => 'Допустимое разрешение фото 450х300']);
             }
-            Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
-            $photo = Storage::disk('public')->put('images', $request->photo);
-            $doctor->photo = "storage/" . $photo;
+
+            Storage::disk('images')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'images/') + strlen('images/')));
+            $photo = Storage::disk('images')->put('/docs', $request->photo);
+            $doctor->photo = 'images/'.$photo;
             $doctor->name = $request->name;
             $doctor->speciality_id = $request->speciality_id;
             $doctor->save();
@@ -93,7 +94,7 @@ class DoctorController extends Controller
     public function destroy(string $id)
     {
         $doctor = Doctor::find($id);
-        Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
+        Storage::disk('images')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'images/') + strlen('images/')));
         $doctor->delete();
         return response()->json(['status' => 'OK']);
     }

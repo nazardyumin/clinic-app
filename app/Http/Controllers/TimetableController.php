@@ -39,7 +39,7 @@ class TimetableController extends Controller
         for ($i = 10; $i <= 30; $i += 5) {
             $durations[] = "$i";
         }
-        $doctors = Doctor::all()->sortBy('name');
+        $doctors = Doctor::all();
         return view('admin.admin_timetable', ['doctors' => $doctors, 'hoursFrom' => $hoursFrom, 'hoursTo' => $hoursTo, 'minutes' => $minutes, 'min_date' => $min_date, 'durations' => $durations]);
     }
 

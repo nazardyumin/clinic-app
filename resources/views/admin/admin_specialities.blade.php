@@ -3,7 +3,7 @@
 
 @section('admin-extra')
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-12 col-lg-4">
             <form method="POST" action="{{ route('speciality.store') }}">
                 @csrf
                 <div class="mb-3">
@@ -21,7 +21,7 @@
             </form>
         </div>
 
-        <div class="col-4 overflow-auto mx-5" style="height: 75vh;">
+        <div class="col-12 col-md-12 col-lg-4 overflow-auto mt-3" style="height: 75vh;">
             <div class="mb-3">
                 <table class="table table-sm">
                     <thead class="sticky-md-top" style="background-color: white">

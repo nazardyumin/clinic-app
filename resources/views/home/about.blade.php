@@ -2,10 +2,10 @@
 
 @section('extra')
     <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-md-12 col-lg-8">
             <img class="img-fluid rounded-pill" src="{{ asset('images/clinic.jpg') }}" alt="doctors">
         </div>
-        <div class="col-3 mt-5">
+        <div class="col-12 col-md-12 col-lg-3 mt-5">
             <img class="img-fluid " src="{{ asset('images/logo.png') }}" alt="doctors">
             <p>Наша клиника оказывает первичную медико-санитарную, специализированную, в том числе высокотехнологичную
                 медицинскую помощь взрослому и детскому населению планово в рамках Программы государственных гарантий

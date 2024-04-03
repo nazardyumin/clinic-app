@@ -3,13 +3,13 @@
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-md-12 col-lg-12">
                 @auth('web')
                     @php
                         $timeZone = Auth::getUser()->timezone;
                         date_default_timezone_set($timeZone);
                     @endphp
-                    <div class="col-3">
+                    <div class="col-12 col-md-12 col-lg-4">
                         <h3>Оставить отзыв</h3>
                         <form method="POST" action="{{ route('comments.add') }}">
                             @csrf
@@ -26,8 +26,8 @@
                 @endguest
             </div>
         </div>
-        <div class="row">
-            <div class="col-6 mt-5">
+        <div class="row mt-5">
+            <div class="col-12 col-md-12 col-lg-6">
                 @if (count($comments) > 0)
                     @foreach ($comments as $comment)
                         <div class="card mb-3">
@@ -40,7 +40,7 @@
                         </div>
                     @endforeach
                 @else
-                    <h6>Отзывы пока отсутствуют</h6>
+                    <h6 class="mt-5">Отзывы пока отсутствуют</h6>
                 @endif
             </div>
         </div>

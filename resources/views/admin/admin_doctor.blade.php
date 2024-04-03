@@ -3,7 +3,7 @@
 
 @section('admin-extra')
     <div class="row">
-        <div class="col-3">
+        <div class="col-12 col-md-12 col-lg-3">
             <form method="POST" action="{{ route('doctor.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -22,7 +22,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="PhotoDoctor" class="form-label">Добавьте фото врача (1500х1000)</label>
+                    <label for="PhotoDoctor" class="form-label">Добавьте фото врача (450х300)</label>
                     <input id="PhotoDoctor" type="file" class="form-control" aria-describedby="Photo Doctor"
                         accept="image/*" name="photo" required>
                 </div>
@@ -40,15 +40,15 @@
             </form>
         </div>
 
-        <div class="col-8 overflow-auto mx-5" style="height: 75vh;">
-            <div class="mb-3">
-                <table class="table table-sm">
+        <div class="col-12 col-md-12 col-lg-9 overflow-auto" style="height: 75vh;">
+            <div class="container-fluid- mb-3">
+                <table class="table table-lg">
                     <thead class="sticky-md-top" style="background-color: white">
                         <tr>
                             <td>ID</td>
                             <td>Врач</td>
                             <td>Специалист</td>
-                            <td>Фото (1500х1000)</td>
+                            <td>Фото (450х300)</td>
                             <td></td>
                             <td></td>
                         </tr>

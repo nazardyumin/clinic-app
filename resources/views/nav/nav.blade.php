@@ -54,7 +54,7 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                     data-bs-display="static" aria-expanded="false">
-                                    {{ Auth::user()->first_name }}
+                                    {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
                                     @php
                                         $count = Auth::getUser()->getAppointmentsCount();
                                     @endphp
@@ -67,12 +67,11 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
                                     <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
-                                    {{-- <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li> --}}
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
 
-                                            <a class="dropdown-item" href="route('logout')"
+                                            <a class="dropdown-item" href="{{route('logout')}}"
                                                 onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                                                 Выйти
