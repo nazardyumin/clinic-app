@@ -1,3 +1,6 @@
+@extends('default')
+
+@section('content')
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Это безопасная зона приложения. Пожалуйста, подтвердите пароль, прежде чем продолжить.') }}
@@ -25,3 +28,4 @@
         </div>
     </form>
 </x-guest-layout>
+@endsection

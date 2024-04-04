@@ -1,3 +1,6 @@
+@extends('default')
+
+@section('content')
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Забыли пароль? Не беда! Введите адрес электронной почты, указанный при регистрации, и мы отправим Вам ссылку для восстановления пароля.') }}
@@ -27,3 +30,4 @@
         </div>
     </form>
 </x-guest-layout>
+@endsection

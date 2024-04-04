@@ -1,8 +1,7 @@
-<x-guest-layout>
-    {{-- <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div> --}}
+@extends('default')
 
+@section('content')
+<x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Благодарим за регистрацию! Для активации учетной записи необходимо подтвердить адрес электронной почты по ссылке в письме, которое мы Вам отправили. Если Вы не получили письмо, нажмите на кнопку ниже.') }}
     </div>
@@ -33,3 +32,4 @@
         </form>
     </div>
 </x-guest-layout>
+@endsection
