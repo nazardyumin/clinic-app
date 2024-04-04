@@ -22,7 +22,7 @@
                 @endguest
             </div>
         </div>
-        <div class="row mt-5 overflow-scroll" style="height: 52.5vh">
+        <div class="row mt-5 overflow-auto" style="height: 52.5vh">
             <div class="col-12 col-md-12 col-lg-6">
                 @if (count($comments) > 0)
                     @foreach ($comments as $comment)
