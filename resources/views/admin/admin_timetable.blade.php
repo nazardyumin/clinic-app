@@ -1,6 +1,5 @@
 @extends('admin.admin_nav')
 
-
 @section('admin-extra')
     <div class="row">
         <form method="POST" action="{{ route('timetable.store') }}">

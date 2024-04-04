@@ -64,7 +64,6 @@
                         <div id="SubmitHelp" class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </form>
-
             </div>
             <div class="col-12 col-md-12 col-lg-9 overflow-auto mt-3" style="height: 75vh;">
                 <div class="mb-3">
