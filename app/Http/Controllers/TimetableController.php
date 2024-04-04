@@ -6,22 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Doctor;
 use App\Models\Appointment;
+use Carbon\Carbon;
 
 class TimetableController extends Controller
 {
     public function index()
     {
         $timeZone = Auth::getUser()->timezone;
-        date_default_timezone_set($timeZone);
 
-        $year = date('Y');
-        $month = date('m');
-        $day = date('d');
-
-        $today = strtotime(date($year . '-' . $month . '-' . $day . ' 00:00')); //сегодня 00:00
-        $tomorrow = strtotime('+1 day', $today); //завтра 00:00
-
-        $min_date = date("Y-m-d", $tomorrow);
+        $min_date = Carbon::tomorrow($timeZone)->format('Y-m-d');
 
         $hoursFrom = [];
         $hoursTo = [];
@@ -51,22 +44,23 @@ class TimetableController extends Controller
     public function store(Request $request)
     {
         if ($request->doctor_id > 0 && $request->date) {
+
             $timeZone = Auth::getUser()->timezone;
-            date_default_timezone_set($timeZone);
+            list($year, $month, $day) = explode("-", $request->date);
 
-            $start = strtotime(date($request->date . ' ' . $request->hours_from . ':' . $request->minutes_from));
-            $end = strtotime(date($request->date . ' ' . $request->hours_to . ':' . $request->minutes_to));
+            $start = Carbon::Create($year, $month, $day, $request->hours_from, $request->minutes_from, $timeZone);
+            $end = Carbon::Create($year, $month, $day, $request->hours_to, $request->minutes_to, $timeZone);
 
-            if (($end - $start) < 60 * 60) {
+            if ($start->diffInMinutes($end) < 60) {
                 return redirect(route('timetable.index'))->withErrors(['error' => 'Задан некорректный временной интервал']);
             } else {
                 do {
                     Appointment::create([
                         'doctor_id' => $request->doctor_id,
-                        'date' => $start
+                        'date' => $start->format('Y-m-d-H-i')
                     ]);
-                    $start = strtotime('+' . $request->duration . ' minutes', $start);
-                } while ($start < $end);
+                    $start->addMinutes(intval($request->duration));
+                } while ($start->diffInMinutes($end) >= intval($request->duration));
                 return redirect(route('timetable.index'))->withErrors(['success' => 'Расписание добавлено']);
             }
         } else {

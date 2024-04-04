@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CommentController extends Controller
 {
@@ -16,11 +16,7 @@ class CommentController extends Controller
 
     public function add(Request $request)
     {
-
-        $timeZone = Auth::user()->timezone;
-        date_default_timezone_set($timeZone);
-        $now = strtotime('now');
-
+        $now = Carbon::now()->toDateTimeString();
         Comment::create([
             'user_id' => $request->user_id,
             'comment' =>  $request->comment,

@@ -10,6 +10,7 @@ use App\Notifications\MyResetPass;
 use App\Notifications\MyVerifyMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -69,13 +70,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Role::class);
     }
 
-
-    //TODO ИСПРАВИТЬ РАБОТУ С ДАТАМИ!!!
     public function getAppointmentsCount(): int
     {
         $timeZone = Auth::getUser()->timezone;
-        date_default_timezone_set($timeZone);
-        $current_date = strtotime('now');
+        $current_date = Carbon::now($timeZone)->format('Y-m-d-H-i');
         $app = Appointment::where('user_id', $this->id)->where('date', '>', $current_date)->get();
         return count($app);
     }

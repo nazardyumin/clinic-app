@@ -1,14 +1,10 @@
 @extends('nav.nav')
-
+@inject('carbon', 'Carbon\Carbon')
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 @auth('web')
-                    @php
-                        $timeZone = Auth::getUser()->timezone;
-                        date_default_timezone_set($timeZone);
-                    @endphp
                     <div class="col-12 col-md-12 col-lg-4">
                         <h3>Оставить отзыв</h3>
                         <form method="POST" action="{{ route('comments.add') }}">
@@ -32,10 +28,14 @@
                     @foreach ($comments as $comment)
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $comment->user->name }}</h5>
+                                <h5 class="card-title">{{ $comment->user->first_name . ' ' . $comment->user->last_name }}</h5>
                                 <p class="card-text">{{ $comment->comment }}</p>
+                                @php
+                                    $timeZone = Auth::getUser()->timezone;
+                                    $commentDate = $carbon::parse($comment->date)->timezone($timeZone);
+                                @endphp
                                 <p class="card-text"><small class="text-body-secondary"><em>Добавлен
-                                            {{ date('d-m-Y H:i', $comment->date) }}</em></small></p>
+                                            {{ $commentDate->format('d.m.Y H:i') }}</em></small></p>
                             </div>
                         </div>
                     @endforeach
