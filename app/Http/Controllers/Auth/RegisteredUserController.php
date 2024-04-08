@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -37,6 +38,12 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $now = Carbon::now($request->timezone);
+        $dateOfBirth = Carbon::parse($request->date_of_birth);
+        if($dateOfBirth->diffInYears($now) < 18){
+            return redirect(route('register'))->withErrors(["date_of_birth" => "Для регистрации Вы должны быть старше 18 лет"]);
+        }
 
         $user = User::create([
             'first_name' => $request->first_name,
