@@ -36,6 +36,7 @@
     <script src="{{ asset('storage/js/admin_doctors.js') }}"></script>
     <script src="{{ asset('storage/js/admin_timetable.js') }}"></script>
     <script src="{{ asset('storage/js/account.js') }}"></script>
+    <script src="{{ asset('storage/js/comments.js') }}"></script>
 </body>
 
 </html>

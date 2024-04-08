@@ -13,6 +13,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('comment');
+            $table->unsignedTinyInteger('rate');
             $table->string('date');
             $table->timestamps();
         });

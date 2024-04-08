@@ -20,6 +20,7 @@ class CommentController extends Controller
         Comment::create([
             'user_id' => $request->user_id,
             'comment' =>  $request->comment,
+            'rate' => $request->rate,
             'date' => $now
         ]);
 
