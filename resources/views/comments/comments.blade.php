@@ -48,10 +48,10 @@
                                             @for ($i = 1; $i <= 5; $i++)
                                                 @if ($i <= $comment->rate)
                                                     <img id="{{ 'star' . $i }}" src="{{ asset('images/star).png') }}"
-                                                        alt="'star" height="18px" style="margin-bottom: 5px">
+                                                        alt="'star" height="15px" style="margin-bottom: 5px;">
                                                 @else
                                                     <img id="{{ 'star' . $i }}" src="{{ asset('images/star(.png') }}"
-                                                        alt="'star" height="18px" style="margin-bottom: 5px">
+                                                        alt="'star" height="15px" style="margin-bottom: 5px;">
                                                 @endif
                                             @endfor
                                         </span>
