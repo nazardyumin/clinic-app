@@ -22,27 +22,36 @@
                 @endguest
             </div>
         </div>
+        @guest
+        <div class="row mt-5 overflow-auto" style="height: 77.5vh">
+        @endguest
+        @auth
         <div class="row mt-5 overflow-auto" style="height: 52.5vh">
-            <div class="col-12 col-md-12 col-lg-6">
-                @if (count($comments) > 0)
-                    @foreach ($comments as $comment)
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $comment->user->first_name . ' ' . $comment->user->last_name }}</h5>
-                                <p class="card-text">{{ $comment->comment }}</p>
-                                @php
-                                    $timeZone = Auth::getUser()->timezone;
-                                    $commentDate = $carbon::parse($comment->date)->timezone($timeZone);
-                                @endphp
-                                <p class="card-text"><small class="text-body-secondary"><em>Добавлен
-                                            {{ $commentDate->format('d.m.Y H:i') }}</em></small></p>
+        @endauth
+                <div class="col-12 col-md-12 col-lg-6">
+                    @if (count($comments) > 0)
+                        @foreach ($comments as $comment)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ $comment->user->first_name . ' ' . $comment->user->last_name }}</h5>
+                                    <p class="card-text">{{ $comment->comment }}</p>
+                                    @php
+                                        $timeZone = 'Europe/Moscow';
+                                        if (Auth::getUser()) {
+                                            $timeZone = Auth::getUser()->timezone;
+                                        }
+                                        $commentDate = $carbon::parse($comment->date)->timezone($timeZone);
+                                    @endphp
+                                    <p class="card-text"><small class="text-body-secondary"><em>Добавлен
+                                                {{ $commentDate->format('d.m.Y H:i') }}</em></small></p>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
-                @else
-                    <h6 class="mt-5">Отзывы пока отсутствуют</h6>
-                @endif
+                        @endforeach
+                    @else
+                        <h6 class="mt-5">Отзывы пока отсутствуют</h6>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
