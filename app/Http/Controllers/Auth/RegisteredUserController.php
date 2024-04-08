@@ -39,11 +39,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $now = Carbon::now($request->timezone);
-        [$year, $month, $day] = explode('-', $request->date_of_birth);
-        $dateOfBirth = Carbon::createMidnightDate($year, $month, $day, $request->timezone);
-
-        if ($dateOfBirth->diffInYears($now) < 18) {
+        if (Carbon::parse($request->date_of_birth)->age < 18) {
             return redirect()->back()->withErrors(["date_of_birth" => "Для регистрации Вы должны быть старше 18 лет"])->withInput();
         }
 
