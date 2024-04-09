@@ -26,6 +26,10 @@
                     <input id="PhotoDoctor" type="file" class="form-control" aria-describedby="Photo Doctor"
                         accept="image/*" name="photo" required>
                 </div>
+                <div class="mb-3">
+                    <label for="EmailDoctor" class="form-label">Добавьте e-mail врача</label>
+                    <input id="EmailDoctor" type="email" class="form-control" aria-describedby="Email Doctor" name="email" required>
+                </div>
                 <button type="submit" class="btn btn-secondary mt-3">Добавить</button>
                 @error('name')
                     <div id="DoctorErrorHelp" class="form-text text-danger mt-3">{{ $message }}</div>

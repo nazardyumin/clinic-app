@@ -38,7 +38,7 @@ class DocUserCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'custom.doc-user-added',
+            markdown: 'custom.doc-created',
         );
     }
 

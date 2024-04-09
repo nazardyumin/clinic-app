@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DocUserCreated;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Speciality;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DoctorController extends Controller
 {
@@ -31,20 +35,28 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "name" => ["required", "string"],
-            "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"]
+            'name' => ['required', 'string'],
+            'photo' => ['required', 'image', 'dimensions:min_width=450,min_height=300,max_width=450,max_height=300'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Doctor::class],
         ]);
+
+        $password = Str::random(10);
 
         if ((int)$request->speciality_id > 0) {
             $photo = Storage::disk('images')->put('/docs', $data['photo']);
-            Doctor::create([
-                "name" => $data["name"],
-                "speciality_id" => $request->speciality_id,
-                "photo" => 'images/'.$photo
+            $doctor = Doctor::create([
+                'name' => $data['name'],
+                'speciality_id' => $request->speciality_id,
+                'photo' => 'images/'.$photo,
+                'email' => $data['email'],
+                'password' => Hash::make($password),
             ]);
+
+            Mail::to($doctor)->send(new DocUserCreated($doctor, $password));
+
             return redirect(route('doctor.index'))->withErrors(['success' => 'Врач успешно добавлен']);
         }
-        return redirect(route('doctor.index'))->withErrors(['name' => 'Специальность не выбрана']);
+        return redirect(route('doctor.index'))->withErrors(['name' => 'Специальность не выбрана'])->withInput();
     }
 
     public function show(string $id)
