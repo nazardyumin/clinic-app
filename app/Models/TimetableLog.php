@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class TimetableLog extends Model
 {
     protected $fillable = [
-        'role'
+        'year',
+        'month',
+        'doctor_id',
+        'admin_id'
     ];
 }

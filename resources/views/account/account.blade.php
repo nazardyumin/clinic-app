@@ -5,7 +5,7 @@
 @endphp
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
-        <h4>Добрый день, {{ Auth::getUser()->first_name . ' ' . Auth::getUser()->patronymic }}!</h4>
+        <h4>{{$greeting . Auth::getUser()->first_name . ' ' . Auth::getUser()->patronymic }}!</h4>
         <div class="row mt-5">
             <h6>Ваши записи:</h6>
             <hr>
