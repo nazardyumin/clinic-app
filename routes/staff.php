@@ -43,6 +43,11 @@ Route::middleware('auth:staff')->group(function () {
         return view('staff.profile');
     })->name('profile');
 
+    Route::get('/logout', [StaffAuthController::class, 'logout'])->name('logout');
+
+    // Route::get('logout', [StaffAuthController::class, 'logout'])->name('logout'));
+
+
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
