@@ -50,13 +50,13 @@
                         @endforeach
                     </select>
                     <span class="input-group-text">до</span>
-                    <select class="form-select col-auto" aria-label="Choose Time" name="{{$i.'hours_to'}}">
+                    <select id="{{'hoursTo_'.$i}}" class="form-select col-auto" aria-label="Choose Time" name="{{$i.'hours_to'}}">
                         @foreach ($hoursTo as $hour)
                             <option value="{{ $hour }}" @if(old($i.'hours_to') == $hour) selected @endif>{{ $hour }}</option>
                         @endforeach
                     </select>
                     <span class="input-group-text">:</span>
-                    <select class="form-select col-auto" aria-label="Choose Time" name="{{$i.'minutes_to'}}">
+                    <select id="{{'minutesTo_'.$i}}" class="form-select col-auto" aria-label="Choose Time" name="{{$i.'minutes_to'}}">
                         @foreach ($minutes as $minute)
                             <option value="{{ $minute }}" @if(old($i.'minutes_to') == $minute) selected @endif>{{ $minute }}</option>
                         @endforeach
