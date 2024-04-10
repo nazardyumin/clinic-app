@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('name');
             $table->string('photo');
+            $table->string('timezone')->nullable();
             $table->foreignIdFor(Speciality::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

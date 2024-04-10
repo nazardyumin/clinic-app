@@ -3,7 +3,7 @@
     <x-guest-layout>
         {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('staff.login') }}">
             @csrf
             <div class="flex items-center justify-center">
                 <h3><b>ПОРТАЛ ДЛЯ СОТРУДНИКОВ</b></h3>
