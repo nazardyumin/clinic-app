@@ -25,7 +25,7 @@
                     </div>
                 @endauth
                 @guest
-                    <p>Чтобы оставить отзыв, <a href="{{ route('register') }}">зарегистрируйтесь</a></p>
+                    <p>Чтобы оставить отзыв, необходимо <a href="{{ route('login') }}">авторизоваться</a>.</p>
                 @endguest
             </div>
         </div>
@@ -42,19 +42,18 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{ $comment->user->first_name . ' ' . $comment->user->last_name }}
-                                        @if($comment->rate>0)
-                                        <span
-                                            style="padding: 0; margin-left: 10px">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= $comment->rate)
-                                                    <img id="{{ 'star' . $i }}" src="{{ asset('images/star).png') }}"
-                                                        alt="'star" height="15px" style="margin-bottom: 5px;">
-                                                @else
-                                                    <img id="{{ 'star' . $i }}" src="{{ asset('images/star(.png') }}"
-                                                        alt="'star" height="15px" style="margin-bottom: 5px;">
-                                                @endif
-                                            @endfor
-                                        </span>
+                                        @if ($comment->rate > 0)
+                                            <span style="padding: 0; margin-left: 10px">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $comment->rate)
+                                                        <img id="{{ 'star' . $i }}" src="{{ asset('images/star).png') }}"
+                                                            alt="'star" height="15px" style="margin-bottom: 5px;">
+                                                    @else
+                                                        <img id="{{ 'star' . $i }}" src="{{ asset('images/star(.png') }}"
+                                                            alt="'star" height="15px" style="margin-bottom: 5px;">
+                                                    @endif
+                                                @endfor
+                                            </span>
                                         @endif
                                     </h5>
                                     <p class="card-text">{{ $comment->comment }}</p>
