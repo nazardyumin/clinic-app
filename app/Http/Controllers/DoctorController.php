@@ -78,10 +78,15 @@ class DoctorController extends Controller
             $data = Validator::make($request->all(), [
                 "name" => ["required", "string"],
                 "speciality_id" => ["numeric"],
-                "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"]
+                "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Doctor::class],
             ]);
-            if ($data->fails()) {
+
+            if ($data->fails('photo')) {
                 return response()->json(['message' => 'Допустимое разрешение фото 450х300']);
+            }
+            if ($data->fails('email') && $request->email != $doctor->email) {
+                return response()->json(['message' => 'Введен некорректный email']);
             }
 
             Storage::disk('images')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'images/') + strlen('images/')));
@@ -89,15 +94,23 @@ class DoctorController extends Controller
             $doctor->photo = 'images/'.$photo;
             $doctor->name = $request->name;
             $doctor->speciality_id = $request->speciality_id;
+            $doctor->email = $request->email;
             $doctor->save();
             return response()->json(['status' => 'OK']);
         } else {
-            $data = $request->validate([
+            $data = Validator::make($request->all(), [
                 "name" => ["required", "string"],
-                "speciality_id" => ["numeric"]
+                "speciality_id" => ["numeric"],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Doctor::class],
             ]);
-            $doctor->name = $data['name'];
-            $doctor->speciality_id = $data['speciality_id'];
+
+            if ($data->fails('email') && $request->email != $doctor->email) {
+                return response()->json(['message' => 'Введен некорректный email']);
+            }
+
+            $doctor->name = $request->name;
+            $doctor->speciality_id = $request->speciality_id;
+            $doctor->email = $request->email;
             $doctor->save();
             return response()->json(['status' => 'OK']);
         }

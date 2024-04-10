@@ -34,6 +34,9 @@
                 @error('name')
                     <div id="DoctorErrorHelp" class="form-text text-danger mt-3">{{ $message }}</div>
                 @enderror
+                @error('email')
+                    <div id="DoctorErrorHelp" class="form-text text-danger mt-3">{{ $message }}</div>
+                @enderror
                 @error('photo')
                     <div id="PhotoErrorHelp" class="form-text text-danger mt-3">{{ $message }}</div>
                 @enderror
@@ -44,7 +47,7 @@
             </form>
         </div>
 
-        <div class="col-12 col-md-12 col-lg-9 overflow-auto" style="height: 75vh;">
+        <div class="col-12 col-md-12 col-lg-9 overflow-auto" style="height: 80vh;">
             <div class="container-fluid- mb-3">
                 <table class="table table-lg">
                     <thead class="sticky-md-top" style="background-color: white">
@@ -52,6 +55,7 @@
                             <td>ID</td>
                             <td>Врач</td>
                             <td>Специалист</td>
+                            <td>Email</td>
                             <td>Фото (450х300)</td>
                             <td></td>
                             <td></td>
@@ -67,7 +71,7 @@
                                     <input id="inputdoc-{{ $doctor->id }}" type="text" class="form-control"
                                         value="{{ $doctor->name }}" required>
                                 </td>
-                                <td>
+                                <td style="width: 180px">
                                     <select id="specdoc-{{ $doctor->id }}" class="form-select"
                                         aria-label="Doc Speciality">
                                         @foreach ($specialities as $speciality)
@@ -77,17 +81,21 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td>
+                                <td style="width: 250px">
+                                    <input id="emaildoc-{{ $doctor->id }}" type="text" class="form-control"
+                                    value="{{ $doctor->email }}" required>
+                                </td>
+                                <td style="width: 350px">
                                     <input id="photodoc-{{ $doctor->id }}" type="file" class="form-control"
                                         accept="image/*">
                                 </td>
-                                <td>
+                                <td style="width: 30px">
                                     <button id="editdoc-{{ $doctor->id }}" class="btn btn-secondary DocEdit">
                                         <img id="imgedit{{ $doctor->id }}" src="{{ asset('images/edit.png') }}"
                                             alt="edit">
                                     </button>
                                 </td>
-                                <td>
+                                <td style="width: 30px">
                                     <button id="{{ $doctor->id }}" class="btn btn-danger DocDelete">
                                         <img id="imgdelete{{ $doctor->id }}" src="{{ asset('images/delete.png') }}"
                                             alt="delete">
