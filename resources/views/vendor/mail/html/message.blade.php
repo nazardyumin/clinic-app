@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-    <img src="https://blotos.ru/wp-content/uploads/f/b/d/fbdb60147c4e1e4b924f6b85991ae9e0.png" alt="App Logo" width="250px">
+    <img src="https://blotos.ru/wp-content/uploads/f/b/d/fbdb60147c4e1e4b924f6b85991ae9e0.png" alt="Клиника Долголетия" width="250px">
 </x-mail::header>
 </x-slot:header>
 
