@@ -1,11 +1,13 @@
 @extends('default')
-
 @section('content')
     <x-guest-layout>
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            <div class="flex items-center justify-center">
+                <h3><b>ПОРТАЛ ДЛЯ СОТРУДНИКОВ</b></h3>
+            </div>
 
             <div>
                 <x-input-label for="email" :value="__('Email')" />
@@ -23,14 +25,6 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Запомнить меня') }}</span>
-                </label>
-            </div>
-
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     style="margin-right: 8px" href="{{ route('home') }}">
@@ -38,32 +32,16 @@
                 </a>
 
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    style="margin-right: 8px" href="{{ route('register') }}">
-                    {{ __('Регистрация') }}
+                    style="margin-right: 8px" href="{{ route('login') }}">
+                    {{ __('Назад') }}
                 </a>
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        href="{{ route('password.request') }}">
-                        {{ __('Забыли пароль?') }}
-                    </a>
-                @endif
 
                 <x-primary-button class="ms-3">
                     {{ __('Войти') }}
                 </x-primary-button>
-
-
-            </div>
-
-            <div class="flex items-center justify-center mt-3">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    style="margin-right: 8px" href="{{ route('staff.login') }}">
-                    {{ __('Вход для медперсонала') }}
-                </a>
             </div>
 
             <input type="hidden" name="timezone" id="timezone">
-
         </form>
     </x-guest-layout>
 @endsection
