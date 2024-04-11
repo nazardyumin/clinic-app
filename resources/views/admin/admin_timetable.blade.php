@@ -29,7 +29,7 @@
                         $check = session('checked');
                     }
                 @endphp
-                <label class="form-check-label" for="exampleCheck1">Новый врач</label>
+                <label class="form-check-label" for="newDocCheckbox">Новый врач</label>
                 <input id="newDocCheckbox" type="checkbox" class="form-check-input mx-1"
                     @if ($check) checked="{{ $check }}" @endif>
             </div>
