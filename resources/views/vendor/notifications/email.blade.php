@@ -7,7 +7,7 @@
 # @lang('Whoops!')
 @else
 @if(Auth::user())
-# @lang('ru.hello', ['user' => Auth::user()->first_name])
+# @lang('ru.hello', ['user' => Auth::user()->first_name.' '.Auth::user()->patronymic])
 @else
 # @lang('Здравствуйте!')
 @endif
