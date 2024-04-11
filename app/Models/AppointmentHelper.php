@@ -17,7 +17,8 @@ class AppointmentHelper
 
         $doctor = Doctor::find($id);
         $appointments = $doctor->appointments;
-        $filtered = $appointments->where('date', '>', $current_date)->where('day_off', '!=', 'true')->sortBy('date');
+        //$filtered = $appointments->where('date', '>', $current_date)->where('day_off', '!=', 'true')->sortBy('date');
+        $filtered = $appointments->where('date', '>', $current_date)->sortBy('date');
 
         $appointments_to_view = [];
         $count = 0;
@@ -39,7 +40,8 @@ class AppointmentHelper
                     $key_memory = $day_key;
                 }
                 $key_concat = ($key_count < 10 ? '0' . $key_count : $key_count) . '|' . $day_key;
-                $appointments_to_view[$key_concat][] = ['id' => $item->id, 'user_id' => $item->user_id, 'time' => $itemDate->format('H:i'), 'day_off' => $item->day_off];
+                //$appointments_to_view[$key_concat][] = ['id' => $item->id, 'user_id' => $item->user_id, 'time' => $itemDate->format('H:i'), 'day_off' => $item->day_off];
+                $appointments_to_view[$key_concat][] = ['id' => $item->id, 'user_id' => $item->user_id, 'time' => $itemDate->format('H:i')];
             }
 
             foreach ($appointments_to_view as $key => $value) {
