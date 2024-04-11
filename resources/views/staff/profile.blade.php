@@ -7,20 +7,37 @@
         <hr>
         @if (count($appointments) > 0)
 
-            <div class="col-12 col-md-12 col-lg-12 mt-3">
+            <div class="col-12 col-md-12 col-lg-2 mt-3 overflow-auto" style="height: 82vh">
 
                 <div class="d-grid gap-2 d-md-block">
                     @foreach ($appointments as $app)
                     @php
                         [$y, $m , $d, $h, $i] = explode('-', $app->date );
                         $app_date = $carbon::create($y, $m , $d, $h, $i, Auth::getUser()->timezone);
-
                     @endphp
-                        <a href="#" class="btn btn-primary mb-3" role="button" data-bs-toggle="button">
+                        @if($app->user())
+                        <button type="button"
+                            @if($app->date < $today->format('Y-m-d-H-i'))
+                            disabled
+                            class="btn btn-sm btn-secondary mb-3"
+                            @else
+                            class="btn btn-sm btn-primary mb-3"
+                            @endif>
                             {{$app_date->format('H:i'). ' - '. $app->user()->last_name.' '.mb_substr($app->user()->first_name, 0, 1).'.'.mb_substr($app->user()->patronymic, 0, 1).'.'}}
-                        </a>
+                        </button>
 
+                        @else
+                        <button type="button"
+                            @if($app->date < $today->format('Y-m-d-H-i'))
+                            disabled
+                            class="btn btn-sm btn-outline-secondary mb-3"
+                            @else
+                            class="btn btn-sm btn-outline-primary mb-3"
+                            @endif>
+                            {{$app_date->format('H:i'). ' - нет записи'}}
+                        </button>
 
+                        @endif
                     @endforeach
                 </div>
 

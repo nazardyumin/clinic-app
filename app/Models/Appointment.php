@@ -23,7 +23,7 @@ class Appointment extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-    public function user(): User
+    public function user(): User|null
     {
         return User::find($this->user_id);
     }

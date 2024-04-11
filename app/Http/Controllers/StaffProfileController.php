@@ -12,8 +12,10 @@ class StaffProfileController extends Controller
     public function index()
     {
         $timeZone = Auth::getUser()->timezone;
-        $current_date = Carbon::now($timeZone);
-        $appointments = Auth::getUser()->appointments->where('date', '>=', $current_date->format('Y-m-d-H-i'))->where('user_id', '!=', null)->sortBy('date');
+        $today = Carbon::now($timeZone);
+        $yesterday = Carbon::yesterday($timeZone)->format('Y-m-d-H-i');
+
+        $appointments = Auth::getUser()->appointments->where('date', '>', $yesterday)->sortBy('date');
         $filtered = $appointments->filter(function (Appointment $app) {
             $tomorrow = Carbon::tomorrow()->format('Y-m-d');
             return $app->date < $tomorrow;
@@ -24,6 +26,6 @@ class StaffProfileController extends Controller
 
         //dd($filtered->all());
 
-        return view('staff.profile', ['appointments' => $filtered->all(),'today' => $current_date]);
+        return view('staff.profile', ['appointments' => $filtered->all(),'today' => $today]);
     }
 }
