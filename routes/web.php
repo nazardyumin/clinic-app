@@ -8,6 +8,7 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
 
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -40,6 +41,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/admin/delete_doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
     Route::post('/admin/update_doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
     Route::resource('/admin/timetable', TimetableController::class);
+    Route::get('/admin/newdoc/{id}', [TimetableController::class, 'newdoc'])->name('timetable.newdoc');
 });
 
 

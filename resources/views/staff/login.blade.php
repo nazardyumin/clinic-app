@@ -33,7 +33,7 @@
 
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     style="margin-right: 8px" href="{{ route('login') }}">
-                    {{ __('Назад') }}
+                    {{ __('Вход на основной портал') }}
                 </a>
 
                 <x-primary-button class="ms-3">

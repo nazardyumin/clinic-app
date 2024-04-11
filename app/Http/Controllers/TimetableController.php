@@ -48,7 +48,7 @@ class TimetableController extends Controller
             $durations[] = "$i";
         }
         $doctors = Doctor::all();
-        return view('admin.admin_timetable', ['doctors' => $doctors, 'hoursFrom' => $hoursFrom, 'hoursTo' => $hoursTo, 'minutes' => $minutes, 'daysInMonth' => $nextMonth->daysInMonth, 'durations' => $durations]);
+        return view('admin.admin_timetable', ['doctors' => $doctors, 'year' => $year, 'month' => $month, 'daysInMonth' => $nextMonth->daysInMonth, 'hoursFrom' => $hoursFrom, 'hoursTo' => $hoursTo, 'minutes' => $minutes, 'durations' => $durations]);
     }
 
     public function create()
@@ -66,7 +66,7 @@ class TimetableController extends Controller
                 if ($request[$i . 'hours_from'] != '-' && $request[$i . 'minutes_from'] != '-' && $request[$i . 'hours_to'] != '-' && $request[$i . 'minutes_to'] != '-') {
                     $start = Carbon::Create($request->year, $request->month, $i, $request[$i . 'hours_from'], $request[$i . 'minutes_from'], $timeZone);
                     $end = Carbon::Create($request->year, $request->month, $i, $request[$i . 'hours_to'], $request[$i . 'minutes_to'], $timeZone);
-                    if ($start->diffInMinutes($end) < 60 ) {
+                    if ($start->diffInMinutes($end) < 60) {
                         return redirect()->back()->withErrors([$i . 'timetableRowError' => "Задан некорректный временной интервал"])->withInput();
                     } else {
                         do {
@@ -93,7 +93,7 @@ class TimetableController extends Controller
                 'doctor_id' => $request->doctor_id,
                 'admin_id' => Auth::id()
             ]);
-            return redirect(route('timetable.index'))->withErrors(['success' => 'Расписание добавлено']);
+            return redirect()->back()->withErrors(['success' => 'Расписание добавлено']);
         } else {
             return redirect()->back()->withErrors(['error' => 'Не все значения выбраны'])->withInput();
         }
@@ -101,19 +101,77 @@ class TimetableController extends Controller
 
     public function show(string $id)
     {
+        [$doc_id, $year, $month] = explode('-', $id);
+        $log = TimetableLog::where('doctor_id', $doc_id)->where('year', $year)->where('month', $month)->first();
+        $record_exists = $log ? true : false;
+        return response()->json(['recordExists' => $record_exists]);
+    }
+
+
+    public function newdoc(string $id)
+    {
+        [$doc_id, $year, $month, $checked] = explode('-', $id);
+        $checked = $checked == 1 ? true : false;
+
         $timeZone = Auth::getUser()->timezone;
-        $now = Carbon::now($timeZone);
-        $year = $now->year;
-        $month = $now->month;
-        if ($month == 12) {
-            $month = 1;
-            $year++;
+
+        if ($checked) {
+            $now = Carbon::now($timeZone);
+            $year = $now->year;
+            $month = $now->month;
+            $log = TimetableLog::where('doctor_id', $doc_id)->where('year', $year)->where('month', $month)->first();
+            $record_exists = $log ? true : false;
+            if ($record_exists) {
+                return redirect(route('timetable.index'))->with([
+                    'doc_id' => $doc_id,
+                    'year' => $year,
+                    'month' => $month,
+                    'record_exists' => $record_exists,
+                    'today' => $now->dayOfMonth,
+                    'daysInMonth' => $now->daysInMonth,
+                    'checked' => $checked,
+                    'error' => 'Для этого врача на этот месяц расписание уже было добавлено',
+                ]);
+            } else {
+                return redirect(route('timetable.index'))->with([
+                    'doc_id' => $doc_id,
+                    'year' => $year,
+                    'month' => $month,
+                    'today' => $now->dayOfMonth,
+                    'daysInMonth' => $now->daysInMonth,
+                    'checked' => $checked,
+                ]);
+            }
         } else {
-            $month++;
+            if (intval($month) == 12) {
+                $month = 1;
+                $year = intval($year) + 1;
+            } else {
+                $month = intval($month) + 1;
+            }
+            $nextMonth = Carbon::createFromDate($year, $month, 1);
+            $log = TimetableLog::where('doctor_id', $doc_id)->where('year', $year)->where('month', $month)->first();
+            $record_exists = $log ? true : false;
+            if ($record_exists) {
+                return redirect(route('timetable.index'))->with([
+                    'doc_id' => $doc_id,
+                    'year' => $year,
+                    'month' => $month,
+                    'record_exists' => $record_exists,
+                    'daysInMonth' => $nextMonth->daysInMonth,
+                    'checked' => $checked,
+                    'error' => 'Расписание для этого врача на этот месяц уже было добавлено',
+                ]);
+            } else {
+                return redirect(route('timetable.index'))->with([
+                    'doc_id' => $doc_id,
+                    'year' => $year,
+                    'month' => $month,
+                    'daysInMonth' => $nextMonth->daysInMonth,
+                    'checked' => $checked,
+                ]);
+            }
         }
-        $log = TimetableLog::where('doctor_id', $id)->where('year', $year)->where('month', $month)->first();
-        $status = $log ? true : false;
-        return response()->json(['status' => $status]);
     }
 
     public function edit(string $id)
