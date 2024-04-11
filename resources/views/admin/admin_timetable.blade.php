@@ -87,6 +87,7 @@
                     $daysInMonth = session('daysInMonth');
                 }
             @endphp
+            <input type="hidden" value="{{$index}}" name="today">
             @for ($i = $index; $i <= $daysInMonth; $i++)
                 <div class="input-group mb-3">
                     <span class="input-group-text">{{ $i < 10 ? '0' . $i : $i }}&nbsp</span>

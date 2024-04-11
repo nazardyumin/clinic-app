@@ -61,8 +61,8 @@ class TimetableController extends Controller
         $emptyRowCount = 0;
         if ($request->doctor_id > 0 && $request->year && $request->month) {
             $timeZone = Auth::getUser()->timezone;
-            $nextMonth = Carbon::createFromDate($request->year, $request->month, 1);
-            for ($i = 1; $i <= $nextMonth->daysInMonth; $i++) {
+            $nextMonth = Carbon::createFromDate($request->year, $request->month, $request->today);
+            for ($i = $request->today; $i <= $nextMonth->daysInMonth; $i++) {
                 if ($request[$i . 'hours_from'] != '-' && $request[$i . 'minutes_from'] != '-' && $request[$i . 'hours_to'] != '-' && $request[$i . 'minutes_to'] != '-') {
                     $start = Carbon::Create($request->year, $request->month, $i, $request[$i . 'hours_from'], $request[$i . 'minutes_from'], $timeZone);
                     $end = Carbon::Create($request->year, $request->month, $i, $request[$i . 'hours_to'], $request[$i . 'minutes_to'], $timeZone);
