@@ -14,11 +14,17 @@ class Appointment extends Model
         'complaints',
         'diagnosis',
         'recommendations',
-        'result_pdf'
+        'result_pdf',
+        'closed'
     ];
 
     public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
+    }
+
+    public function user(): User
+    {
+        return User::find($this->user_id);
     }
 }
