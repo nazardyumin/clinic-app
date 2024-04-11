@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DocEmailChanged;
 use App\Mail\DocUserCreated;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
@@ -72,6 +73,7 @@ class DoctorController extends Controller
     public function update(Request $request, string $id)
     {
         $doctor = Doctor::find($id);
+        $password = Str::random(10);
 
         if ($request->has('photo')) {
 
@@ -88,14 +90,19 @@ class DoctorController extends Controller
             if ($data->fails('email') && $request->email != $doctor->email) {
                 return response()->json(['message' => 'Введен некорректный email']);
             }
+            $needToSendEmail = $doctor->email != $request->email;
 
             Storage::disk('images')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'images/') + strlen('images/')));
             $photo = Storage::disk('images')->put('/docs', $request->photo);
             $doctor->photo = 'images/'.$photo;
             $doctor->name = $request->name;
             $doctor->speciality_id = $request->speciality_id;
-            $doctor->email = $request->email;
+            if($needToSendEmail){
+                $doctor->email = $request->email;
+                $doctor->password = Hash::make($password);
+            }
             $doctor->save();
+            if($needToSendEmail) Mail::to($doctor)->send(new DocEmailChanged($doctor, $password));
             return response()->json(['status' => 'OK']);
         } else {
             $data = Validator::make($request->all(), [
@@ -108,10 +115,15 @@ class DoctorController extends Controller
                 return response()->json(['message' => 'Введен некорректный email']);
             }
 
+            $needToSendEmail = $doctor->email != $request->email;
             $doctor->name = $request->name;
             $doctor->speciality_id = $request->speciality_id;
-            $doctor->email = $request->email;
+            if($needToSendEmail){
+                $doctor->email = $request->email;
+                $doctor->password = Hash::make($password);
+            }
             $doctor->save();
+            if($needToSendEmail) Mail::to($doctor)->send(new DocEmailChanged($doctor, $password));
             return response()->json(['status' => 'OK']);
         }
     }

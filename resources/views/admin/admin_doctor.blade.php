@@ -82,7 +82,7 @@
                                     </select>
                                 </td>
                                 <td style="width: 250px">
-                                    <input id="emaildoc-{{ $doctor->id }}" type="text" class="form-control"
+                                    <input id="emaildoc-{{ $doctor->id }}" type="email" class="form-control"
                                     value="{{ $doctor->email }}" required>
                                 </td>
                                 <td style="width: 350px">
