@@ -1,3 +1,5 @@
-<h1>ВЫ ВОШЛИ</h1>
+@extends('nav.nav-staff')
 
-<a href="{{route('staff.logout')}}"> выйти</a>
+@section('extra')
+
+@endsection
