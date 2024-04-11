@@ -28,29 +28,12 @@ class StaffAuthController extends Controller
             return redirect()->intended(route('staff.profile', absolute: false));
         }
         return redirect(route('login'))->withErrors(["password" => "Неверный логин или пароль"]);
-
-
-
-
-        // if (auth(guard: "staff")->attempt($request->only('email', 'password'))) {
-        //     $request->session()->regenerate();
-        //     // $user_id = Auth::id();
-        //     // $user = Doctor::find($user_id);
-        //     // if ($user->timezone != $data['timezone']) {
-        //     //     $user->timezone = $data['timezone'];
-        //     //     $user->save();
-        //     // }
-        //     return redirect(route('staff.profile'));
-        // }
-
-        //
-
-        //return redirect()->intended(route('account', absolute: false));
     }
 
     public function logout()
     {
         auth(guard: "staff")->logout();
+        session()->invalidate();
         return redirect(route('staff.login'));
     }
 }
