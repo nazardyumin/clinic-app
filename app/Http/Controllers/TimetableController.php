@@ -130,7 +130,7 @@ class TimetableController extends Controller
                     'today' => $now->dayOfMonth,
                     'daysInMonth' => $now->daysInMonth,
                     'checked' => $checked,
-                    'error' => 'Для этого врача на этот месяц расписание уже было добавлено',
+                    'error' => 'Расписание для этого врача на этот месяц уже было добавлено',
                 ]);
             } else {
                 return redirect(route('timetable.index'))->with([
