@@ -13,7 +13,8 @@ class StaffProfileController extends Controller
     {
         $timeZone = Auth::getUser()->timezone;
         $today = Carbon::now($timeZone);
-        $yesterday = Carbon::yesterday($timeZone)->format('Y-m-d-H-i');
+        $yesterday = Carbon::yesterday($timeZone)->addDays(1)->format('Y-m-d-H-i');
+        //dd($yesterday);
 
         $appointments = Auth::getUser()->appointments->where('date', '>', $yesterday)->sortBy('date');
         $filtered = $appointments->filter(function (Appointment $app) {
