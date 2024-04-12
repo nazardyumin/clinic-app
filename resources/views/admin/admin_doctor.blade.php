@@ -27,7 +27,7 @@
                         accept="image/*" name="photo" required>
                 </div>
                 <div class="mb-3">
-                    <label for="EmailDoctor" class="form-label">Добавьте e-mail врача</label>
+                    <label for="EmailDoctor" class="form-label">Введите e-mail врача</label>
                     <input id="EmailDoctor" type="email" class="form-control" aria-describedby="Email Doctor" name="email" required>
                 </div>
                 <button type="submit" class="btn btn-secondary mt-3">Добавить</button>
