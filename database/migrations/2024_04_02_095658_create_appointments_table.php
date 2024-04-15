@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignIdFor(Doctor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('date');
+            $table->tinyInteger('duration');
             $table->text('complaints')->nullable();
             $table->string('diagnosis')->nullable();
             $table->text('recommendations')->nullable();

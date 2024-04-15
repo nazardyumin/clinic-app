@@ -72,7 +72,8 @@ class TimetableController extends Controller
                         do {
                             Appointment::create([
                                 'doctor_id' => $request->doctor_id,
-                                'date' => $start->format('Y-m-d-H-i')
+                                'date' => $start->format('Y-m-d-H-i'),
+                                'duration' => intval($request[$i . 'duration'])
                             ]);
                             $start->addMinutes(intval($request[$i . 'duration']));
                         } while ($start->diffInMinutes($end) >= intval($request[$i . 'duration']));
