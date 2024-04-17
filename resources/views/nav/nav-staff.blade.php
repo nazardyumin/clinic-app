@@ -1,4 +1,4 @@
-@extends('default')
+@extends('default-staff')
 
 @section('content')
     <header>
@@ -57,8 +57,17 @@
                                     {{ Auth::user()->name}}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    <li><a class="dropdown-item" href="{{ route('staff.logout') }}">Выйти</a></li>
-
+                                    {{-- <li><a class="dropdown-item" href="{{ route('staff.logout') }}">Выйти</a></li> --}}
+                                    <li>
+                                        <form id="logoutForm" method="POST" action="{{ route('staff.logout') }}">
+                                            @csrf
+                                            <a class="dropdown-item" href="{{route('staff.logout')}}"
+                                                onclick="event.preventDefault();
+                                                        $('form#logoutForm').submit();">
+                                                Выйти
+                                            </a>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         @endauth

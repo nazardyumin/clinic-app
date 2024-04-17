@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PdfController;
 
 
 // Route::get('/dashboard', function () {
@@ -42,6 +43,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::post('/admin/update_doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
     Route::resource('/admin/timetable', TimetableController::class);
     Route::get('/admin/newdoc/{id}', [TimetableController::class, 'newdoc'])->name('timetable.newdoc');
+    Route::post('/account/result', [PdfController::class, 'show_pdf'])->name('show.pdf');
 });
 
 

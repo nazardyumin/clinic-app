@@ -22,8 +22,8 @@
     </div>
 
     <script src="{{ asset('storage/js/bootstrap.bundle.min.js') }}"></script>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data-1970-2030.min.js"> --}}
     </script>
     {{-- <script>
@@ -35,8 +35,8 @@
     <script src="{{ asset('storage/js/admin_specialities.js') }}"></script>
     <script src="{{ asset('storage/js/admin_doctors.js') }}"></script>
     <script src="{{ asset('storage/js/admin_timetable.js') }}"></script>
-    <script src="{{ asset('storage/js/account.js') }}"></script>
-    <script src="{{ asset('storage/js/comments.js') }}"></script> --}}
+    <script src="{{ asset('storage/js/account.js') }}"></script>--}}
+    <script src="{{ asset('storage/js/staff.js') }}"></script>
 </body>
 
 </html>

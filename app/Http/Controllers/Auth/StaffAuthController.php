@@ -30,10 +30,11 @@ class StaffAuthController extends Controller
         return redirect(route('staff.login'))->withErrors(["password" => "Неверный логин или пароль"]);
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
-        auth(guard: "staff")->logout();
-        session()->invalidate();
+        Auth::guard('staff')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect(route('staff.login'));
     }
 }
