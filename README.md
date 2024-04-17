@@ -19,9 +19,9 @@
 ## Использованные технологии и библиотеки
 
 - **[Laravel](https://laravel.com/)**
+- **[Laravel Breeze](https://github.com/laravel/breeze)**
+- **[DOMPDF Wrapper for Laravel](https://github.com/barryvdh/laravel-dompdf)**
 - **[Ajax/jQuery](https://jquery.com/)**
 - **[Moment.js](https://momentjs.com/)**
 - **[Bootstrap](https://getbootstrap.com/)**
 - **[Carbon](https://carbon.nesbot.com/docs/)**
-- **[DOMPDF Wrapper for Laravel](https://github.com/barryvdh/laravel-dompdf)**
-- **[Laravel Breeze](https://github.com/laravel/breeze)**
