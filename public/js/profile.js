@@ -4,7 +4,6 @@ $(document).ready(function () {
         let date = buttons[i].id.substring(3);
         var appDate = Date.parse(date);
         if (appDate < Date.now()) {
-            //buttons[i].remove();
             buttons[i].disabled = true;
             buttons[i].textContent = 'Приём просрочен';
             buttons[i].classList.replace('btn-danger', 'btn-outline-secondary');
@@ -16,5 +15,4 @@ $(document).ready(function () {
                 });
         }
     }
-
 });

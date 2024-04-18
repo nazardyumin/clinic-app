@@ -8,7 +8,6 @@ use App\Models\Doctor;
 use App\Models\Speciality;
 use App\Models\AppointmentHelper;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {

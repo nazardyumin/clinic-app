@@ -15,7 +15,6 @@ class Appointment extends Model
         'complaints',
         'diagnosis',
         'recommendations',
-        'result_pdf',
         'closed'
     ];
 

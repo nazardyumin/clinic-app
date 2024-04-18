@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('complaints')->nullable();
             $table->string('diagnosis')->nullable();
             $table->text('recommendations')->nullable();
-            $table->string('result_pdf')->nullable();
             $table->boolean('closed')->default(false);
             $table->timestamps();
         });

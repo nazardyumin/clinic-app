@@ -23,7 +23,6 @@ class CommentController extends Controller
             'rate' => $request->rate,
             'date' => $now
         ]);
-
         return redirect(route('comments'));
     }
 }
