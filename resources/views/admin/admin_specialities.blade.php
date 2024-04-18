@@ -20,7 +20,7 @@
             </form>
         </div>
 
-        <div class="col-12 col-md-12 col-lg-4 overflow-auto mt-3" style="height: 75vh;">
+        <div class="col-12 col-md-12 col-lg-4 overflow-auto mt-3" style="height: 80vh;">
             <div class="mb-3">
                 <table class="table table-sm">
                     <thead class="sticky-md-top" style="background-color: white">
