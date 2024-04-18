@@ -10,7 +10,7 @@ class PatientController extends Controller
 {
     public function show_user_appointments()
     {
-        $appointments = Appointment::where('user_id', Auth::id())->get()->sortBy('date');
+        $appointments = Appointment::where('user_id', Auth::id())->get()->sortByDesc('date');
         $now = Carbon::now(Auth::getUser()->timezone);
         $now->hour;
         $greetings = ['Доброе утро, ', 'Добрый день, ', 'Добрый вечер, ', 'Доброй ночи, '];

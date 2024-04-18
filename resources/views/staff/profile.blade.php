@@ -67,7 +67,7 @@
                         $closed = session('selectedApp')->closed;
                     }
                 @endphp
-
+                <h5 class="text-center">Детали приема</h5>
                 <form id="appForm" action="{{ route('staff.update', $appId) }}" method="POST">
                     @csrf
                     <h6 class="mb-3">Пациент: &nbsp <b>{{ $patient }}</b></h6>
