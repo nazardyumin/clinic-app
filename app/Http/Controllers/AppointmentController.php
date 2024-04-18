@@ -44,7 +44,7 @@ class AppointmentController extends Controller
             $upd = Appointment::find($request->appointment_id);
             $upd->user_id = Auth::id();
             $upd->save();
-            return redirect(route('account'));
+            return redirect(route('profile'));
         } else if (!$request->doctor_id) {
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран"]);
         } else {
@@ -55,24 +55,11 @@ class AppointmentController extends Controller
         }
     }
 
-    public function show_user_appointments()
-    {
-        $appointments = Appointment::where('user_id', Auth::id())->get()->sortBy('date');
-        $now = Carbon::now(Auth::getUser()->timezone);
-        $now->hour;
-        $greetings = ['Доброе утро, ', 'Добрый день, ', 'Добрый вечер, ', 'Доброй ночи, '];
-        $index = 0;
-        if ($now->hour >= 12 && $now->hour < 18) $index = 1;
-        else if ($now->hour >= 18 && $now->hour < 24) $index = 2;
-        else if ($now->hour >= 0 && $now->hour < 6) $index = 3;
-        return view('account.account', ['appointments' => $appointments, 'greeting' => $greetings[$index]]);
-    }
-
     public function delete_user_appointment(string $id)
     {
         $app = Appointment::find($id);
         $app->user_id = null;
         $app->save();
-        return redirect(route('account'));
+        return redirect(route('profile'));
     }
 }

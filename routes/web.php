@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PdfController;
 
 
 // Route::get('/dashboard', function () {
@@ -15,13 +14,13 @@ use App\Http\Controllers\PdfController;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth:web', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     /////////////////////////////////////
 
-
-
+    Route::get('/profile', [PatientController::class, 'show_user_appointments'])->name('profile');
+    Route::post('/profile/result', [PatientController::class, 'show_pdf'])->name('show.pdf');
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
@@ -29,7 +28,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
 
-    Route::get('/account', [AppointmentController::class, 'show_user_appointments'])->name('account');
+
     Route::get('/delete_appointment/{id}', [AppointmentController::class, 'delete_user_appointment'])->name('delete_appointment');
 
     Route::get('/admin/speciality', [SpecialityController::class, 'index'])->name('speciality.index');
@@ -43,7 +42,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::post('/admin/update_doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
     Route::resource('/admin/timetable', TimetableController::class);
     Route::get('/admin/newdoc/{id}', [TimetableController::class, 'newdoc'])->name('timetable.newdoc');
-    Route::post('/account/result', [PdfController::class, 'show_pdf'])->name('show.pdf');
+
 });
 
 

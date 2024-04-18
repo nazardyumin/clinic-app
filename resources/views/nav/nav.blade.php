@@ -66,7 +66,7 @@
                                     @endif
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Личный кабинет</a></li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
