@@ -48,6 +48,10 @@
                     $patient = '';
                     $age = '';
                     $appId = '';
+                    $complaints = '';
+                    $diagnosis = '';
+                    $recommendations = '';
+                    $closed = false;
                     if (session('selectedApp')) {
                         $patient =
                             session('selectedApp')->user()->last_name .
@@ -56,25 +60,46 @@
                             ' ' .
                             session('selectedApp')->user()->patronymic;
                         $age = $carbon::parse(session('selectedApp')->user()->date_of_birth)->age;
-                        $appId=session('selectedApp')->id;
+                        $appId = session('selectedApp')->id;
+                        $complaints = session('selectedApp')->complaints;
+                        $diagnosis = session('selectedApp')->diagnosis;
+                        $recommendations = session('selectedApp')->recommendations;
+                        $closed = session('selectedApp')->closed;
                     }
                 @endphp
 
-                <form action="{{ route('staff.update', $appId)}}" method="POST">
+                <form id="appForm" action="{{ route('staff.update', $appId) }}" method="POST">
                     @csrf
                     <h6 class="mb-3">Пациент: &nbsp <b>{{ $patient }}</b></h6>
                     <h6 class="mb-3">Возраст: &nbsp <b>{{ $age }}</b></h6>
                     <h6>Жалобы: </h6>
-                    <textarea rows="6" class="form-control" name="complaints" required></textarea>
+                    <textarea rows="6" class="form-control" name="complaints" required>{{ $complaints }}</textarea>
                     <h6 class="mt-3">Диагноз: </h6>
-                    <textarea rows="6" class="form-control" name="diagnosis" required></textarea>
+                    <textarea rows="6" class="form-control" name="diagnosis" required>{{ $diagnosis }}</textarea>
                     <h6 class="mt-3">Назначения: </h6>
-                    <textarea rows="7" class="form-control" name="recommendations" required></textarea>
-                    <div class="d-flex flex-row-reverse">
-                        <button type="submit" class="btn btn-secondary mt-3"
-                            @if (!session('selectedApp')) disabled @endif>Завершить прием</button>
-                    </div>
+                    <textarea rows="7" class="form-control" name="recommendations" required>{{ $recommendations }}</textarea>
                 </form>
+
+                <div class="d-flex flex-row-reverse">
+                    <button class="btn btn-secondary mt-3"
+                    @if (!session('selectedApp') || $closed) disabled
+                    @endif
+                    onclick="
+                    event.preventDefault();
+                    $('form#appForm').submit();
+                    ">Завершить прием</button>
+
+                    @if ($closed)
+                    <form id="pdfForm" method="POST" action="{{ route('staff.show.pdf') }}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $appId }}">
+                        <a href="{{ route('staff.show.pdf') }}" class="btn btn-secondary mt-3 mx-3"
+                            onclick="event.preventDefault();
+                            $('form#pdfForm').submit();">Открыть заключение
+                        </a>
+                    </form>
+                    @endif
+                </div>
             </div>
         </div>
     @endsection

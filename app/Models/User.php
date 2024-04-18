@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $timeZone = Auth::getUser()->timezone;
         $current_date = Carbon::now($timeZone)->format('Y-m-d-H-i');
-        $app = Appointment::where('user_id', $this->id)->where('date', '>', $current_date)->get();
+        $app = Appointment::where('user_id', $this->id)->where('date', '>', $current_date)->where('closed','!=',true)->get();
         return count($app);
     }
 }

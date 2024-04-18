@@ -32,7 +32,6 @@ class StaffProfileController extends Controller
 
     public function update(Request $request, string $id)
     {
-
         $app = Appointment::find($id);
         $app->complaints = $request->complaints;
         $app->diagnosis = $request->diagnosis;
@@ -43,7 +42,7 @@ class StaffProfileController extends Controller
         // $app->result_pdf =  $path;
         $app->save();
 
-        return redirect(route('staff.profile'));
+        return redirect(route('staff.profile'))->with(['selectedApp' => $app]);
     }
 
     // public function createPdf()

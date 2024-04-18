@@ -32,12 +32,12 @@
                                 <input type="hidden" name="appointment_id" value="{{ $app->id }}">
 
                                 @if ($app->closed)
-                                    <form id="{{ 'form' . $app->id }}" method="POST" action="{{ route('show.pdf') }}">
+                                    <form method="POST" action="{{ route('show.pdf.p') }}">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $app->id }}">
-                                        <a href="{{ route('show.pdf') }}" class="btn btn-secondary"
+                                        <a href="{{ route('show.pdf.p') }}" class="btn btn-secondary"
                                             onclick="event.preventDefault();
-                                            this.closest('form').submit();">Открыть результат
+                                            this.closest('form').submit();">Открыть заключение
                                         </a>
                                     </form>
                                 @else

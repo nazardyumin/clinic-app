@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PdfController;
 
 
 // Route::get('/dashboard', function () {
@@ -20,7 +21,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     /////////////////////////////////////
 
     Route::get('/profile', [PatientController::class, 'show_user_appointments'])->name('profile');
-    Route::post('/profile/result', [PatientController::class, 'show_pdf'])->name('show.pdf');
+    Route::post('/profile/result', [PdfController::class, 'show_pdf'])->name('show.pdf.p');
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
