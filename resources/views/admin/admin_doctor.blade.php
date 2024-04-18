@@ -7,7 +7,7 @@
             <form method="POST" action="{{ route('doctor.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="InputDoctor" class="form-label">Введите имя врача</label>
+                    <label for="InputDoctor" class="form-label">Введите имя врача (Фамилия Имя Отчество)</label>
                     <input id="InputDoctor" type="text" class="form-control" name="name" aria-describedby="Input Doctor"
                         required autocomplete="name">
                 </div>
