@@ -25,3 +25,4 @@
 - **[Moment.js](https://momentjs.com/)**
 - **[Bootstrap](https://getbootstrap.com/)**
 - **[Carbon](https://carbon.nesbot.com/docs/)**
+- **[Tailwind CSS](https://tailwindcss.com/)**
