@@ -92,7 +92,7 @@
         </nav>
     </header>
 
-    <div class="container-fluid" style="margin-top: 75px">
+    <div class="container-fluid" style="margin-top: 75px;">
         @yield('extra')
     </div>
 @endsection

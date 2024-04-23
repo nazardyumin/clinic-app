@@ -7,3 +7,6 @@
         <img class="img-fluid" src="{{ asset('images/doctors.jpg') }}" alt="">
     </picture>
 @endsection
+<div class="fixed-bottom text-center">
+    <p style="font-size: 12px">© {{ date('Y') }} {{ config('app.name') }}. {{ __('ru.All rights reserved.') }}</p>
+</div>
