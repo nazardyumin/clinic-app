@@ -58,5 +58,20 @@
                 <h6>Вы пока не записаны ни к одному врачу</h6>
             @endif
         </div>
+
+        @if (request()->has('verified'))
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="emailVerifiedToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="{{ asset('images/icon.png') }}" class="rounded me-2" alt="logo" style="height: 20px">
+                        <strong class="me-auto">Клиника Долголетия</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Ваша почта <b>{{Auth::getUser()->email}}</b> успешно подтверждена!
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection

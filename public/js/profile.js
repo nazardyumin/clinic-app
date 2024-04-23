@@ -15,4 +15,7 @@ $(document).ready(function () {
                 });
         }
     }
+
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(emailVerifiedToast);
+    toastBootstrap.show();
 });

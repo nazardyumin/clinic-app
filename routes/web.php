@@ -9,18 +9,19 @@ use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PdfController;
 
+use App\Http\Controllers\ProfileController;
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth:web', 'verified'])->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    /////////////////////////////////////
-
     Route::get('/profile', [PatientController::class, 'show_user_appointments'])->name('profile');
+    Route::patch('/profile', [PatientController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [PatientController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/settings', [PatientController::class, 'settings'])->name('profile.settings');
+
     Route::post('/profile/result', [PdfController::class, 'show_pdf'])->name('show.pdf.p');
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
