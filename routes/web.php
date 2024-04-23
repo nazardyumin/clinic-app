@@ -10,7 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PdfController;
 
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\StatisticsController;
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -45,6 +45,8 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::resource('/admin/timetable', TimetableController::class);
     Route::get('/admin/newdoc/{id}', [TimetableController::class, 'newdoc'])->name('timetable.newdoc');
 
+    Route::get('/admin/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
+    Route::get('/admin/show_stat/{id}', [StatisticsController::class, 'show'])->name('statistics.show');
 });
 
 

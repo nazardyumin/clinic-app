@@ -1,6 +1,5 @@
 @extends('admin.admin_nav')
 
-
 @section('admin-extra')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-3">

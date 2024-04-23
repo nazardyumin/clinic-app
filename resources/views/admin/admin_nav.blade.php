@@ -17,6 +17,10 @@
                         <a class="nav-link {{ request()->routeIs('timetable.*') ? 'active' : '' }}"
                             href="{{ route('timetable.index') }}">Расписание</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('statistics.*') ? 'active' : '' }}"
+                            href="{{ route('statistics.index') }}">Статистика</a>
+                    </li>
                 </ul>
                 <div class="container-fluid" style="margin-top: 45px">
                     @yield('admin-extra')
