@@ -24,5 +24,6 @@
 - **[Ajax/jQuery](https://jquery.com/)**
 - **[Moment.js](https://momentjs.com/)**
 - **[Bootstrap](https://getbootstrap.com/)**
--  **[Tailwind CSS](https://tailwindcss.com/)**
+- **[Tailwind CSS](https://tailwindcss.com/)**
 - **[Carbon](https://carbon.nesbot.com/docs/)**
+- **[Google Charts](https://developers.google.com/chart?hl=ru)**
