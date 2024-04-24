@@ -1,7 +1,7 @@
 @extends('nav.nav')
 @inject('carbon', 'Carbon\Carbon')
 @section('extra')
-    <div class="container-fluid- mx-5" style="margin-top: 100px">
+    <div class="container-fluid- mx-3" style="margin-top: 100px">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 @auth('web')

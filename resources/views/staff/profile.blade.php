@@ -1,7 +1,7 @@
 @extends('nav.nav-staff')
 @inject('carbon', 'Carbon\Carbon')
 @section('extra')
-    <div class="container-fluid- mx-5" style="margin-top: 100px">
+    <div class="container-fluid- mx-3" style="margin-top: 100px">
         <div class="row mt-5">
             <h6>Ваши пациенты на {{ $today->format('d.m.Y') }}:</h6>
             <hr>
@@ -43,7 +43,7 @@
                 @endif
             </div>
 
-            <div class="col-12 col-md-12 col-lg-9 mt-3 mx-3">
+            <div class="col-11 col-md-12 col-lg-9 mt-3 mx-3 mb-3">
                 @php
                     $patient = '';
                     $age = '';
@@ -67,7 +67,7 @@
                         $closed = session('selectedApp')->closed;
                     }
                 @endphp
-                <h5 class="text-center">Протокол осмотра</h5>
+                <h5 class="text-center mb-3">Протокол осмотра</h5>
                 <form id="appForm" action="{{ route('staff.update', $appId) }}" method="POST">
                     @csrf
                     <h6 class="mb-3">Пациент: &nbsp <b>{{ $patient }}</b></h6>
@@ -77,7 +77,7 @@
                     <h6 class="mt-3">Диагноз: </h6>
                     <textarea rows="6" class="form-control" name="diagnosis" required>{{ $diagnosis }}</textarea>
                     <h6 class="mt-3">Назначения: </h6>
-                    <textarea rows="7" class="form-control" name="recommendations" required>{{ $recommendations }}</textarea>
+                    <textarea rows="6" class="form-control" name="recommendations" required>{{ $recommendations }}</textarea>
                 </form>
 
                 <div class="d-flex flex-row-reverse">
