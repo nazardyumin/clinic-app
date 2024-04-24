@@ -85,10 +85,10 @@ class DoctorController extends Controller
             ]);
 
             if ($data->fails('photo')) {
-                return response()->json(['message' => 'Допустимое разрешение фото 450х300']);
+                return response()->json(['message' => 'Допустимое разрешение фото 450х300.']);
             }
             if ($data->fails('email') && $request->email != $doctor->email) {
-                return response()->json(['message' => 'Введен некорректный email']);
+                return response()->json(['message' => 'Введен некорректный email.']);
             }
             $needToSendEmail = $doctor->email != $request->email;
 
@@ -112,7 +112,7 @@ class DoctorController extends Controller
             ]);
 
             if ($data->fails('email') && $request->email != $doctor->email) {
-                return response()->json(['message' => 'Введен некорректный email']);
+                return response()->json(['message' => 'Введен некорректный email.']);
             }
 
             $needToSendEmail = $doctor->email != $request->email;

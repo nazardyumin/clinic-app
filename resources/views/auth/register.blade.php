@@ -31,6 +31,7 @@
             <div class="mt-4">
                 <x-input-label for="dat" :value="__('Дата рождения')" />
                 <x-text-input id="dat" class="block mt-1 w-full" type="date"
+                    min="{{$carbon->now()->subYears(100)->format('Y-m-d')}}"
                     max="{{ $carbon::yesterday()->format('Y-m-d') }}" name="date_of_birth" :value="old('date_of_birth')" required
                     autofocus autocomplete="date_of_birth" />
                 <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />

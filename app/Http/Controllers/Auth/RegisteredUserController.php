@@ -31,16 +31,16 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'patronymic' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255', 'min:2'],
+            'last_name' => ['required', 'string', 'max:255', 'min:2'],
+            'patronymic' => ['required', 'string', 'max:255', 'min:2'],
             'date_of_birth' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         if (Carbon::parse($request->date_of_birth)->age < 18) {
-            return redirect()->back()->withErrors(["date_of_birth" => "Для регистрации Вы должны быть старше 18 лет"])->withInput();
+            return redirect()->back()->withErrors(["date_of_birth" => "Для регистрации Вы должны быть старше 18 лет."])->withInput();
         }
 
         $user = User::create([

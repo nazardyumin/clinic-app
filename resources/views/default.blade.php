@@ -38,7 +38,7 @@
     <script src="{{ asset('js/admin_statistics.js') }}"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/comments.js') }}"></script>
-    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/auth.js') }}"></script>
 
 </body>
 

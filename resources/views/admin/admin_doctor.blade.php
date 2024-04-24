@@ -8,14 +8,14 @@
                 <div class="mb-3">
                     <label for="InputDoctor" class="form-label">Введите имя врача (Фамилия Имя Отчество)</label>
                     <input id="InputDoctor" type="text" class="form-control" name="name" aria-describedby="Input Doctor"
-                        required autocomplete="name">
+                        required autocomplete="name" value="{{old('name')}}">
                 </div>
                 <div class="mb-3">
                     <label for="InputSpeciality" class="form-label">Выберите специалиста</label>
                     <select id="InputSpeciality" class="form-select" aria-label="Input Speciality" name="speciality_id">
                         <option value="0" selected>-- Не выбран --</option>
                         @foreach ($specialities as $speciality)
-                            <option value="{{ $speciality->id }}">
+                            <option value="{{ $speciality->id }}" @if($speciality->id == old('speciality_id')) selected @endif>
                                 {{ $speciality->speciality }}</option>
                         @endforeach
                     </select>

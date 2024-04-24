@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'Неверные email или пароль.',
-    'password' => 'The provided password is incorrect.',
+    'password' => 'Введё неверный пароль.',
     'throttle' => 'Слишком много попыток входа. Пожалуйста, попробуйте через :seconds секунд.',
 
 ];
