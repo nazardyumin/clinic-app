@@ -77,20 +77,29 @@ class DoctorController extends Controller
 
         if ($request->has('photo')) {
 
-            $data = Validator::make($request->all(), [
-                "name" => ["required", "string"],
-                "speciality_id" => ["numeric"],
-                "photo" => ["required", "image", "dimensions:min_width=450,min_height=300,max_width=450,max_height=300"],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Doctor::class],
-            ]);
-
-            if ($data->fails('photo')) {
-                return response()->json(['message' => 'Допустимое разрешение фото 450х300.']);
+            $needToSendEmail = $doctor->email != $request->email;
+            $data=null;
+            if($needToSendEmail){
+                $data = Validator::make($request->all(), [
+                    'name' => ["required", "string"],
+                    'speciality_id' => ["numeric"],
+                    'photo' => ['required', 'image', 'dimensions:min_width=450,min_height=300,max_width=450,max_height=300'],
+                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Doctor::class],
+                ]);
+            }else{
+                $data = Validator::make($request->all(), [
+                    'name' => ["required", "string"],
+                    'speciality_id' => ["numeric"],
+                    'photo' => ['required', 'image', 'dimensions:min_width=450,min_height=300,max_width=450,max_height=300'],
+                ]);
             }
             if ($data->fails('email') && $request->email != $doctor->email) {
                 return response()->json(['message' => 'Введен некорректный email.']);
             }
-            $needToSendEmail = $doctor->email != $request->email;
+
+            if ($data->fails('photo')) {
+                return response()->json(['message' => 'Допустимое разрешение фото 450х300.']);
+            }
 
             Storage::disk('images')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'images/') + strlen('images/')));
             $photo = Storage::disk('images')->put('/docs', $request->photo);

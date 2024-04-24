@@ -26,6 +26,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <x-primary-button class="ms-3">
+                    {{ __('Войти') }}
+                </x-primary-button>
+            </div>
+
+            <div class="flex items-center justify-center mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     style="margin-right: 8px" href="{{ route('home') }}">
                     {{ __('На главную') }}
@@ -35,10 +41,6 @@
                     style="margin-right: 8px" href="{{ route('login') }}">
                     {{ __('Вход на основной портал') }}
                 </a>
-
-                <x-primary-button class="ms-3">
-                    {{ __('Войти') }}
-                </x-primary-button>
             </div>
 
             <input type="hidden" name="timezone" id="timezone">

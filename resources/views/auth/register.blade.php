@@ -66,6 +66,12 @@
 
 
             <div class="flex items-center justify-end mt-4">
+                <x-primary-button class="ms-4">
+                    {{ __('Зарегистрироваться') }}
+                </x-primary-button>
+            </div>
+
+            <div class="flex items-center justify-center mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     style="margin-right: 8px" href="{{ route('home') }}">
                     {{ __('На главную') }}
@@ -75,11 +81,8 @@
                     href="{{ route('login') }}">
                     {{ __('Есть аккаунт?') }}
                 </a>
-
-                <x-primary-button class="ms-4">
-                    {{ __('Зарегистрироваться') }}
-                </x-primary-button>
             </div>
+
         </form>
     </x-guest-layout>
 @endsection
