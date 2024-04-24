@@ -21,31 +21,38 @@ class StatisticsController extends Controller
     public function show(string $id)
     {
         [$doc_id, $year] = explode('_', $id);
-        $work_time = [];
+        $expected_time = [];
+        $fact_time = [];
 
         for ($i = 1; $i <= 12; $i++) {
             $y = intval($year);
             $m = $i;
-            if($m == 12){
+            if ($m == 12) {
                 $y += 1;
                 $m = 1;
-            }else{
-                $m +=1;
+            } else {
+                $m += 1;
             }
-            $apps = Appointment::where('doctor_id', $doc_id)->where('closed', true)->where('date', '>', Carbon::createFromDate($year, $i, 1)->format('Y-m-d'))->get();
+            $expected_apps = Appointment::where('doctor_id', $doc_id)->where('date', '>', Carbon::createFromDate($year, $i, 1)->format('Y-m-d'))->get();
+            $fact_apps = Appointment::where('doctor_id', $doc_id)->where('closed', true)->where('date', '>', Carbon::createFromDate($year, $i, 1)->format('Y-m-d'))->get();
 
-            $filtered = $apps->where('date', '<', Carbon::createFromDate($y, $m, 1)->format('Y-m-d'));
+            $filtered_expected = $expected_apps->where('date', '<', Carbon::createFromDate($y, $m, 1)->format('Y-m-d'));
+            $filtered_fact = $fact_apps->where('date', '<', Carbon::createFromDate($y, $m, 1)->format('Y-m-d'));
 
-            CarbonInterval::setLocale('ru');
-            $interval = CarbonInterval::seconds(0);
+            $interval_expected = CarbonInterval::seconds(0);
+            $interval_fact = CarbonInterval::seconds(0);
 
-            foreach($filtered as $a){
-                $interval->addMinutes(intval($a->duration));
+            foreach ($filtered_expected as $a) {
+                $interval_expected->addMinutes(intval($a->duration));
+            }
+            foreach ($filtered_fact as $a) {
+                $interval_fact->addMinutes(intval($a->duration));
             }
 
-            $work_time[$i] = $interval->totalHours;
+            $expected_time[$i] = $interval_expected->totalHours;
+            $fact_time[$i] = $interval_fact->totalHours;;
         }
 
-        return response()->json(['work_time' => $work_time]);
+        return response()->json(['expected_time' => $expected_time, 'fact_time' => $fact_time]);
     }
 }

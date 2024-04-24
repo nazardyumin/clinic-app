@@ -1,27 +1,28 @@
 $(document).ready(function () {
     google.charts.load("current", { packages: ["corechart", "bar"] });
 
-    function drawBasic(items) {
+    function drawBasic(expected, fact) {
         var data = new google.visualization.DataTable();
         data.addColumn("string", "месяц");
+        data.addColumn("number", "часы по записи");
         data.addColumn("number", "отработано часов");
         data.addRows([
-            ["январь", items[1]],
-            ["февраль", items[2]],
-            ["март", items[3]],
-            ["апрель", items[4]],
-            ["май", items[5]],
-            ["июнь", items[6]],
-            ["июль", items[7]],
-            ["август", items[8]],
-            ["сентябрь", items[9]],
-            ["октябрь", items[10]],
-            ["ноябрь", items[11]],
-            ["декабрь", items[12]],
+            ["январь", expected[1], fact[1]],
+            ["февраль", expected[2], fact[2]],
+            ["март", expected[3], fact[3]],
+            ["апрель", expected[4], fact[4]],
+            ["май", expected[5], fact[5]],
+            ["июнь", expected[6], fact[6]],
+            ["июль", expected[7], fact[7]],
+            ["август", expected[8], fact[8]],
+            ["сентябрь", expected[9], fact[9]],
+            ["октябрь", expected[10], fact[10]],
+            ["ноябрь", expected[11], fact[11]],
+            ["декабрь", expected[12], fact[12]],
         ]);
 
         var options = {
-            title: "Таблица отработанного времени (с пациентами)",
+            title: "Статистика планируемого и фактического отработанного времени",
             hAxis: {},
             vAxis: {},
         };
@@ -54,7 +55,7 @@ $(document).ready(function () {
             type: "GET",
             url: ajaxurl,
             success: function (data) {
-                google.charts.setOnLoadCallback(drawBasic(data.work_time));
+                google.charts.setOnLoadCallback(drawBasic(data.expected_time, data.fact_time));
             },
         });
     });
