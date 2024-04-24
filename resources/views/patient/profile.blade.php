@@ -8,7 +8,7 @@
             : $greeting . Auth::getUser()->first_name;
 @endphp
 @section('extra')
-    <div class="container-fluid- mx-5" style="margin-top: 100px">
+    <div class="container-fluid- mx-3" style="margin-top: 100px">
         <h4>{{ $greetingText }}!</h4>
         <div class="row mt-5">
             <h6>Ваши записи:</h6>
