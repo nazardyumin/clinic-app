@@ -27,9 +27,8 @@
                                         $appDate = $carbon::create($year, $month, $day, $hour, $minute, $timeZone);
                                         $str_date = $appDate->format('Y-m-d H:i:s');
                                     @endphp
-                                    <p class="card-text">Дата: {{ $appDate->format('d.m.Y') }} время:
-                                        {{ $appDate->format('H:i') }}
-                                    </p>
+                                    <p class="card-text" style="margin-bottom: 3px">Дата: {{ $appDate->format('d.m.Y') }}</p>
+                                    <p class="card-text">Время: {{ $appDate->format('H:i') }}</p>
                                     <input type="hidden" name="appointment_id" value="{{ $app->id }}">
 
                                     @if ($app->closed)

@@ -1,3 +1,6 @@
+@extends('default')
+
+@section('content')
 <x-app-layout>
     <div class="flex lg:flex-row md:flex-col sm:flex-col py-12 justify-center">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -29,3 +32,4 @@
         </div>
     </div>
 </x-app-layout>
+@endsection
