@@ -54,7 +54,7 @@
         @endphp
         <p class="fields">Дата приема: <b>{{ $app_date->format('d.m.Y, H:i') }}</b></p>
         <p class="fields">Пациент: <b>{{ $app->user()->last_name . ' ' . $app->user()->first_name . ' ' . $app->user()->patronymic }}</b></p>
-        <p class="fields">Возраст: <b>{{ $carbon::parse($app->user()->date_of_birth)->age }}</b></p>
+        <p class="fields">Дата рождения: <b>{{$carbon::parse($app->user()->date_of_birth)->format('d.m.Y')}}</b>, возраст: <b>{{ $carbon::parse($app->user()->date_of_birth)->age }}</b></p>
         <p class="fields">Врач: <b>{{ $app->doctor->name }}, {{Str::lower($app->doctor->speciality->speciality)}}</b></p>
 
 

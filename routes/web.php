@@ -8,20 +8,13 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PdfController;
-
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticsController;
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/profile', [PatientController::class, 'show_user_appointments'])->name('profile');
     Route::patch('/profile', [PatientController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [PatientController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/settings', [PatientController::class, 'settings'])->name('profile.settings');
-
     Route::post('/profile/result', [PdfController::class, 'show_pdf'])->name('show.pdf.p');
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
@@ -29,8 +22,6 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
-
-
     Route::get('/delete_appointment/{id}', [AppointmentController::class, 'delete_user_appointment'])->name('delete_appointment');
 
     Route::get('/admin/speciality', [SpecialityController::class, 'index'])->name('speciality.index');
@@ -49,7 +40,6 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/admin/show_stat/{id}', [StatisticsController::class, 'show'])->name('statistics.show');
 });
 
-
 Route::get('/', function () {
     return redirect(route('home'));
 });
@@ -65,8 +55,5 @@ Route::get('/home', function () {
     return view('home.home');
 })->name('home');
 Route::get('/doctors', [DoctorController::class, 'show_doctors'])->name('doctors');
-
-
-
 
 require __DIR__ . '/auth.php';

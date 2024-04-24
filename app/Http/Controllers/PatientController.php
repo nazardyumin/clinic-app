@@ -30,9 +30,6 @@ class PatientController extends Controller
         return view('patient.settings', ['user' => Auth::getUser()]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -48,9 +45,6 @@ class PatientController extends Controller
         return Redirect::route('profile.settings')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

@@ -45,12 +45,12 @@ class AppointmentController extends Controller
             $upd->save();
             return redirect(route('profile'));
         } else if (!$request->doctor_id) {
-            return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран"]);
+            return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран."]);
         } else {
             $response = AppointmentHelper::get_doctor_appointments($request->doctor_id);
             $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
             session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
-            return redirect(route('appointments'))->withErrors(["appointment_id" => "Не выбрано время для записи"]);
+            return redirect(route('appointments'))->withErrors(["appointment_id" => "Не выбрано время для записи."]);
         }
     }
 

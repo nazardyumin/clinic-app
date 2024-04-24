@@ -27,7 +27,7 @@ class StaffAuthController extends Controller
             }
             return redirect()->intended(route('staff.profile', absolute: false));
         }
-        return redirect(route('staff.login'))->withErrors(["password" => "Неверный логин или пароль"])->withInput();
+        return redirect(route('staff.login'))->withErrors(["password" => "Неверный логин или пароль."])->withInput();
     }
 
     public function logout(Request $request): RedirectResponse
