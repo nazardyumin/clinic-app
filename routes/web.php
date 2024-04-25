@@ -16,6 +16,9 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::delete('/profile', [PatientController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/settings', [PatientController::class, 'settings'])->name('profile.settings');
     Route::post('/profile/result', [PdfController::class, 'show_pdf'])->name('show.pdf.p');
+    Route::get('/profile/result', function(){
+        abort(404);
+    });
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
