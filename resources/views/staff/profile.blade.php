@@ -15,7 +15,7 @@
                             @endphp
                             @if ($app->user())
                                 <button type="button"
-                                    @if ($app->date < $today->format('Y-m-d-H-i')) disabled
+                                    @if ($app->date < $today->subMinutes(15)->format('Y-m-d-H-i')) disabled
                             class="btn btn-sm btn-secondary mb-3"
                             @else
                             @php
