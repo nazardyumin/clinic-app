@@ -35,7 +35,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('profile', absolute: false));
+        if (redirect()->intended()->getTargetUrl() == route('logout') || redirect()->intended()->getTargetUrl() == route('show.pdf.p')) {
+            return redirect(route('profile'));
+        } else
+            return redirect()->intended(route('profile', absolute: false));
     }
 
     /**

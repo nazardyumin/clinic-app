@@ -25,6 +25,9 @@ class StaffAuthController extends Controller
                 $user->timezone = $request['timezone'];
                 $user->save();
             }
+            if (redirect()->intended()->getTargetUrl() == route('staff.logout') || redirect()->intended()->getTargetUrl() == route('staff.show.pdf.p') || redirect()->intended()->getTargetUrl() == route('staff.update')) {
+                return redirect(route('staff.profile'));
+            }
             return redirect()->intended(route('staff.profile', absolute: false));
         }
         return redirect(route('staff.login'))->withErrors(["password" => "Неверный логин или пароль."])->withInput();
