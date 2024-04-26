@@ -22,18 +22,6 @@
                 @endforeach
             </select>
 
-            <div class="mt-3 form-check-end">
-                @php
-                    $check = false;
-                    if (session('checked')) {
-                        $check = session('checked');
-                    }
-                @endphp
-                <label class="form-check-label" for="newDocCheckbox">Новый врач</label>
-                <input id="newDocCheckbox" type="checkbox" class="form-check-input mx-1"
-                    @if ($check) checked="{{ $check }}" @endif>
-            </div>
-
             <div class="input-group mt-3">
                 <span class="input-group-text">Год</span>
                 @php
@@ -53,6 +41,17 @@
                 <select id="monthSelect" class="form-select col-auto" aria-label="Choose Month" name="month">
                     <option value="{{ $month }}">{{ $month < 10 ? '0' . $month : $month }}</option>
                 </select>
+            </div>
+            <div class="mt-3 form-check-end">
+                @php
+                    $check = false;
+                    if (session('checked')) {
+                        $check = session('checked');
+                    }
+                @endphp
+                <label class="form-check-label" for="newDocCheckbox">Текущий месяц</label>
+                <input id="newDocCheckbox" type="checkbox" class="form-check-input mx-1"
+                    @if ($check) checked="{{ $check }}" @endif>
             </div>
             @php
                 $disabled = false;
