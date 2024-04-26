@@ -142,6 +142,7 @@ $(document).ready(function () {
     function tdIsChecked(e) {
         e.preventDefault();
         var id = $(".btn-info").attr("id");
+        $("#appointmentId").val(null);
         if (id == undefined) id = 0;
 
         if (id != parseInt(e.target.id)) {
@@ -155,10 +156,14 @@ $(document).ready(function () {
                     if (data.success) {
                         $("#" + e.target.id).removeClass("btn-light");
                         $("#" + e.target.id).attr("class", "btn btn-info");
-                        $("#appointmentId").val($("#" + e.target.id).attr("id"));
+                        $("#appointmentId").val(
+                            $("#" + e.target.id).attr("id")
+                        );
                     } else {
                         var toastBootstrap =
-                            bootstrap.Toast.getOrCreateInstance(appointmentIsBusy);
+                            bootstrap.Toast.getOrCreateInstance(
+                                appointmentIsBusy
+                            );
                         if (toastBootstrap) toastBootstrap.show();
                     }
                 },
