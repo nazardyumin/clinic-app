@@ -21,6 +21,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     });
 
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
+    Route::get('/appointments_hold/{id}', [AppointmentController::class, 'hold']);
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');

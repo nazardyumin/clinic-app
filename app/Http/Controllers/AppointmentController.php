@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ReleaseAppointment;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -41,8 +42,15 @@ class AppointmentController extends Controller
     {
         if ($request->appointment_id && $request->doctor_id) {
             $upd = Appointment::find($request->appointment_id);
-            $upd->user_id = Auth::id();
-            $upd->save();
+            if ($upd->user_id == null) {
+                $upd->user_id = Auth::id();
+                $upd->save();
+            } else {
+                $response = AppointmentHelper::get_doctor_appointments($request->doctor_id);
+                $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
+                session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
+                return redirect(route('appointments'))->withErrors(["appointment_id" => "Это время занято."]);
+            }
             return redirect(route('profile'));
         } else if (!$request->doctor_id) {
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран."]);
@@ -60,5 +68,27 @@ class AppointmentController extends Controller
         $app->user_id = null;
         $app->save();
         return redirect(route('profile'));
+    }
+
+    public function hold(string $id)
+    {
+        [$hold_id, $release_id] = explode('-', $id);
+        $hold = Appointment::find($hold_id);
+
+        if ($hold_id != $release_id) {
+            if (intval($release_id) > 0) {
+                $release = Appointment::find($release_id);
+                $release->busy = false;
+                $release->save();
+            }
+        }
+        if (!$hold->busy) {
+            $hold->busy = true;
+            $hold->save();
+            ReleaseAppointment::dispatch($hold)->delay(now()->addSeconds(30));
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 }

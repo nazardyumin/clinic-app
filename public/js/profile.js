@@ -5,8 +5,8 @@ $(document).ready(function () {
         var appDate = Date.parse(date);
         if (appDate < Date.now()) {
             buttons[i].disabled = true;
-            buttons[i].textContent = 'Запись просрочена';
-            buttons[i].classList.replace('btn-danger', 'btn-outline-secondary');
+            buttons[i].textContent = "Запись просрочена";
+            buttons[i].classList.replace("btn-danger", "btn-outline-secondary");
             document.getElementById("a" + date).href = "";
             document
                 .getElementById("a" + date)
@@ -16,6 +16,10 @@ $(document).ready(function () {
         }
     }
 
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(emailVerifiedToast);
-    if(toastBootstrap) toastBootstrap.show();
+    var emailVerifiedToast = document.getElementById("emailVerifiedToast");
+    if(emailVerifiedToast){
+        var toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(emailVerifiedToast);
+        toastBootstrap.show();
+    }
 });

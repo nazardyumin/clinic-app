@@ -114,4 +114,16 @@
             </div>
         </div>
     </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="appointmentIsBusy" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="{{ asset('images/icon.png') }}" class="rounded me-2" alt="logo" style="height: 20px">
+                <strong class="me-auto">Клиника Долголетия</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Это время в настоящий момент кем-то зарезервировано.
+            </div>
+        </div>
+    </div>
 @endsection

@@ -142,11 +142,28 @@ $(document).ready(function () {
     function tdIsChecked(e) {
         e.preventDefault();
         var id = $(".btn-info").attr("id");
-        $("#" + id).removeClass("btn btn-info");
-        $("#" + id).attr("class", "btn btn-light");
-        $("#" + e.target.id).removeClass("btn-light");
-        $("#" + e.target.id).attr("class", "btn btn-info");
-        $("#appointmentId").val($("#" + e.target.id).attr("id"));
+        if (id == undefined) id = 0;
+
+        if (id != parseInt(e.target.id)) {
+            $("#" + id).removeClass("btn btn-info");
+            $("#" + id).attr("class", "btn btn-light");
+            let ajaxurl = "/appointments_hold/" + e.target.id + "-" + id;
+            $.ajax({
+                type: "GET",
+                url: ajaxurl,
+                success: function (data) {
+                    if (data.success) {
+                        $("#" + e.target.id).removeClass("btn-light");
+                        $("#" + e.target.id).attr("class", "btn btn-info");
+                        $("#appointmentId").val($("#" + e.target.id).attr("id"));
+                    } else {
+                        var toastBootstrap =
+                            bootstrap.Toast.getOrCreateInstance(appointmentIsBusy);
+                        if (toastBootstrap) toastBootstrap.show();
+                    }
+                },
+            });
+        }
         $("#SubmitHelp").text("");
     }
 

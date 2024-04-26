@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('diagnosis')->nullable();
             $table->text('recommendations')->nullable();
             $table->boolean('closed')->default(false);
+            $table->boolean('busy')->default(false);
             $table->timestamps();
         });
     }
