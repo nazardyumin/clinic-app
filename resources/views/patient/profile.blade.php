@@ -14,7 +14,8 @@
             <h6>Ваши записи:</h6>
             <hr>
             @if (count($appointments) > 0)
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 overflow-auto" style="height: 75vh">
+                <div class="row row-cols-1 row-cols-md-3 g-2 mt-3 overflow-auto">
+                    {{-- <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 overflow-auto" style="height: 75vh"> --}}
                     @foreach ($appointments as $app)
                         <div class="col">
                             <div class="card">
@@ -67,7 +68,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">
-                        Ваша почта <b>{{Auth::getUser()->email}}</b> успешно подтверждена!
+                        Ваша почта <b>{{ Auth::getUser()->email }}</b> успешно подтверждена!
                     </div>
                 </div>
             </div>

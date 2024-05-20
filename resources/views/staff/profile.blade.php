@@ -5,7 +5,7 @@
         <div class="row mt-5">
             <h6>Ваши пациенты на {{ $today->format('d.m.Y') }}:</h6>
             <hr>
-            <div class="col-12 col-md-12 col-lg-2 mt-3 overflow-auto" style="height: 82vh">
+            <div class="col-12 col-md-12 col-lg-1 mt-3 overflow-auto" style="height: 82vh">
                 @if (count($appointments) > 0)
                     <div class="d-grid gap-2 d-md-block">
                         @foreach ($appointments as $app)
@@ -43,7 +43,7 @@
                 @endif
             </div>
 
-            <div class="col-11 col-md-12 col-lg-9 mt-3 mx-3 mb-3">
+            <div class="col-11 col-md-12 col-lg-10 mt-3 mx-3 mb-3">
                 @php
                     $patient = '';
                     $age = '';
@@ -81,23 +81,23 @@
                 </form>
 
                 <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-secondary mt-3"
-                    @if (!session('selectedApp') || $closed) disabled
-                    @endif
-                    onclick="
+                    <button class="btn btn-secondary mt-3" @if (!session('selectedApp') || $closed) disabled @endif
+                        onclick="
                     event.preventDefault();
                     $('form#appForm').submit();
-                    ">Завершить прием</button>
+                    ">Завершить
+                        прием</button>
 
                     @if ($closed)
-                    <form id="pdfForm" method="POST" action="{{ route('staff.show.pdf') }}">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $appId }}">
-                        <a href="{{ route('staff.show.pdf') }}" class="btn btn-secondary mt-3 mx-3"
-                            onclick="event.preventDefault();
-                            $('form#pdfForm').submit();">Открыть заключение
-                        </a>
-                    </form>
+                        <form id="pdfForm" method="POST" action="{{ route('staff.show.pdf') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $appId }}">
+                            <a href="{{ route('staff.show.pdf') }}" class="btn btn-secondary mt-3 mx-3"
+                                onclick="event.preventDefault();
+                            $('form#pdfForm').submit();">Открыть
+                                заключение
+                            </a>
+                        </form>
                     @endif
                 </div>
             </div>
