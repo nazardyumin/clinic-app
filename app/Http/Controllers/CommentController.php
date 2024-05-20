@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function show()
     {
-        $comments = Comment::all();
+        $comments = Comment::all()->sortDesc();
         return view('comments.comments', compact('comments'));
     }
 
