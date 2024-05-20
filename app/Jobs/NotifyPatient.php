@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Mail;
 
-class NotifyClient implements ShouldQueue
+class NotifyPatient implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
