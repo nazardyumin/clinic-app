@@ -16,7 +16,8 @@ class Appointment extends Model
         'diagnosis',
         'recommendations',
         'closed',
-        'busy'
+        'busy',
+        'job_id'
     ];
 
     public function doctor(): BelongsTo

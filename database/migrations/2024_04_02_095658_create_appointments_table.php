@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('recommendations')->nullable();
             $table->boolean('closed')->default(false);
             $table->boolean('busy')->default(false);
+            $table->unsignedBigInteger('job_id')->nullable();
             $table->timestamps();
         });
     }
