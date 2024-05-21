@@ -24,9 +24,7 @@
                                         ({{ $app->doctor->speciality->speciality }})
                                     </h5>
                                     @php
-                                        [$year, $month, $day, $hour, $minute] = explode('-', $app->date);
-                                        $appDate = $carbon::create($year, $month, $day, $hour, $minute, $timeZone);
-                                        $str_date = $appDate->format('Y-m-d H:i:s');
+                                        $appDate = $carbon::createFromFormat('Y-m-d-H-i', $app->date, $timeZone);
                                     @endphp
                                     <p class="card-text" style="margin-bottom: 3px">Дата: {{ $appDate->format('d.m.Y') }}</p>
                                     <p class="card-text">Время: {{ $appDate->format('H:i') }}</p>
@@ -38,17 +36,22 @@
                                             <input type="hidden" name="id" value="{{ $app->id }}">
                                             <a href="{{ route('show.pdf.p') }}" class="btn btn-secondary"
                                                 onclick="event.preventDefault();
-                                            this.closest('form').submit();">Открыть заключение
+                                            this.closest('form').submit();">Открыть
+                                                заключение
                                             </a>
                                         </form>
                                     @else
                                         <form method="POST" action="{{ route('delete_appointment') }}">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $app->id }}">
-                                            <button id="but{{ $str_date }}" class="btn btn-danger"
-                                                onclick="event.preventDefault();
+                                            @if ($appDate->diffInMinutes(now($timeZone))>=0)
+                                                <button class="btn btn-outline-secondary" disabled>Запись просрочена</button>
+                                            @else
+                                                <button  class="btn btn-danger"
+                                                    onclick="event.preventDefault();
                                                     this.closest('form').submit();">Отменить запись
-                                            </button>
+                                                </button>
+                                            @endif
                                         </form>
                                     @endif
 
