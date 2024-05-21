@@ -38,15 +38,18 @@
                                             <input type="hidden" name="id" value="{{ $app->id }}">
                                             <a href="{{ route('show.pdf.p') }}" class="btn btn-secondary"
                                                 onclick="event.preventDefault();
-                                            this.closest('form').submit();">Открыть
-                                                заключение
+                                            this.closest('form').submit();">Открыть заключение
                                             </a>
                                         </form>
                                     @else
-                                        <a id="a{{ $str_date }}"
-                                            href="{{ route('delete_appointment', $app->id) }}"><button
-                                                id="but{{ $str_date }}" class="btn btn-danger">Отменить
-                                                запись</button></a>
+                                        <form method="POST" action="{{ route('delete_appointment') }}">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $app->id }}">
+                                            <button id="but{{ $str_date }}" class="btn btn-danger"
+                                                onclick="event.preventDefault();
+                                                    this.closest('form').submit();">Отменить запись
+                                            </button>
+                                        </form>
                                     @endif
 
                                 </div>

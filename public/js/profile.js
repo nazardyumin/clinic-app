@@ -7,12 +7,6 @@ $(document).ready(function () {
             buttons[i].disabled = true;
             buttons[i].textContent = "Запись просрочена";
             buttons[i].classList.replace("btn-danger", "btn-outline-secondary");
-            document.getElementById("a" + date).href = "";
-            document
-                .getElementById("a" + date)
-                .addEventListener("click", function (e) {
-                    e.preventDefault();
-                });
         }
     }
 

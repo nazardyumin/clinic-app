@@ -74,9 +74,9 @@ class AppointmentController extends Controller
         }
     }
 
-    public function delete_user_appointment(string $id)
+    public function delete_user_appointment(Request $request)
     {
-        $app = Appointment::find($id);
+        $app = Appointment::find($request->id);
         $app->user_id = null;
         $job_id = $app->job_id;
         $app->job_id = null;
