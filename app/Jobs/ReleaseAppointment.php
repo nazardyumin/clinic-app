@@ -20,9 +20,6 @@ class ReleaseAppointment implements ShouldQueue
         $this->appointment = $appointment;
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         if($this->appointment->busy){

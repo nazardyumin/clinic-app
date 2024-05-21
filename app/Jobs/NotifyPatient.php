@@ -17,17 +17,11 @@ class NotifyPatient implements ShouldQueue
 
     protected Appointment $appointment;
 
-    /**
-     * Create a new job instance.
-     */
     public function __construct(Appointment $appointment)
     {
         $this->appointment = $appointment;
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         Mail::to($this->appointment->user())->send(new AppointmentNotification($this->appointment));

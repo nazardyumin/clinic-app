@@ -50,7 +50,7 @@ class StatisticsController extends Controller
             }
 
             $expected_time[$i] = $interval_expected->totalHours;
-            $fact_time[$i] = $interval_fact->totalHours;;
+            $fact_time[$i] = $interval_fact->totalHours;
         }
 
         return response()->json(['expected_time' => $expected_time, 'fact_time' => $fact_time]);
