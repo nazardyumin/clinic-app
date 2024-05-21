@@ -24,9 +24,12 @@ class AppointmentController extends Controller
     public function redirect_from_doctors_page(string $id)
     {
         $response = AppointmentHelper::get_doctor_appointments($id);
-        $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
-        session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
-        return redirect(route('appointments'));
+        if($response['doctor']){
+            $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
+            session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
+            return redirect(route('appointments'));
+        }
+        abort(404);
     }
 
     public function get_doctors(string $id)
