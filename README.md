@@ -31,3 +31,6 @@
 ## Диаграмма базы данных
 [dbdiagram.io](https://dbdiagram.io/d/6647834ff84ecd1d2279b217)
 
+## Ссылка на приложение
+[Клиника Долголетия](http://clinic.free.nf/home)
+
