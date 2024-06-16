@@ -29,5 +29,5 @@
 - **[Google Charts](https://developers.google.com/chart?hl=ru)**
   
 ## Диаграмма базы данных
-[БД](https://dbdiagram.io/d/6647834ff84ecd1d2279b217)
+[dbdiagram.io](https://dbdiagram.io/d/6647834ff84ecd1d2279b217)
 
