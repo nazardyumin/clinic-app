@@ -27,3 +27,7 @@
 - **[Tailwind CSS](https://tailwindcss.com/)**
 - **[Carbon](https://carbon.nesbot.com/docs/)**
 - **[Google Charts](https://developers.google.com/chart?hl=ru)**
+  
+## Диаграмма базы данных
+[БД](https://dbdiagram.io/d/6647834ff84ecd1d2279b217)
+
