@@ -20,6 +20,7 @@
 
 - **[Laravel](https://laravel.com/)**
 - **[Laravel Breeze](https://github.com/laravel/breeze)**
+- **[MySQL](https://www.mysql.com)**
 - **[DOMPDF Wrapper for Laravel](https://github.com/barryvdh/laravel-dompdf)**
 - **[Ajax/jQuery](https://jquery.com/)**
 - **[Moment.js](https://momentjs.com/)**
